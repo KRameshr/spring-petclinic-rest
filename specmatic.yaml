@@ -1,0 +1,23 @@
+version: 3
+systemUnderTest:
+  service:
+    $ref: "#/components/services/petclinicService"
+    runOptions:
+      $ref: "#/components/runOptions/petclinicServiceTest"
+components:
+  services:
+    petclinicService:
+      description: Spring Petclinic REST Service
+      definitions:
+        - definition:
+            specs:
+              - spec:
+                  path: openapi.yml
+            source:
+              filesystem:
+                directory: src/main/resources
+  runOptions:
+    petclinicServiceTest:
+      openapi:
+        type: test
+        baseUrl: http://localhost:9966/petclinic/api
