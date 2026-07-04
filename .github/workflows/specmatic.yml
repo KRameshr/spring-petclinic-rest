@@ -18,14 +18,21 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Make mvnw executable
+        run: chmod +x mvnw
+
       - name: Start application
         run: |
-          nohup ./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa" &
-          sleep 45
+          nohup ./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa" > app.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -s http://localhost:9966/petclinic/actuator/health && break
+            echo "Waiting for app to start... ($i)"
+            sleep 5
+          done
 
       - name: Download Specmatic
         run: |
-          curl -L -o specmatic.jar https://github.com/specmatic/specmatic/releases/latest/download/specmatic-executable-all.jar
+          curl -L -o specmatic.jar https://github.com/specmatic/specmatic/releases/latest/download/specmatic.jar
 
       - name: Run Specmatic contract tests
         run: java -jar specmatic.jar test
