@@ -321,6 +321,32 @@ This project contains **non-regression tests** for the Petclinic API, built with
     ```
 > Note: You can use your currently bash installed. Like: "bash postman-tests.sh"
 
+## Contract Testing with Specmatic
+
+This project uses [Specmatic](https://specmatic.io) for OpenAPI contract testing, validating that the running API stays true to the [OpenAPI spec](./src/main/resources/openapi.yml).
+
+### Prerequisites
+- Java 17+
+- The [Specmatic executable jar](https://github.com/specmatic/specmatic/releases)
+
+### Running Contract Tests
+
+1. Start the application (see "Running Petclinic locally" above):
+```sh
+   ./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
+```
+
+2. In a separate terminal, run Specmatic tests using the `specmatic.yaml` config in the project root:
+```sh
+   java -jar /path/to/specmatic.jar test
+```
+
+Specmatic will read `specmatic.yaml`, load the OpenAPI spec, and run contract tests against `http://localhost:9966/petclinic/api`, reporting any mismatches between the spec and the actual API behavior.
+
+### Configuration
+See [`specmatic.yaml`](./specmatic.yaml) for the Specmatic v3 configuration (system under test, spec path, and base URL).
+
+
 ## Interesting Spring Petclinic forks
 
 The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
