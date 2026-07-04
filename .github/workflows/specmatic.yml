@@ -1,0 +1,31 @@
+name: Specmatic Contract Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Start application
+        run: |
+          nohup ./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa" &
+          sleep 45
+
+      - name: Download Specmatic
+        run: |
+          curl -L -o specmatic.jar https://github.com/specmatic/specmatic/releases/latest/download/specmatic-executable-all.jar
+
+      - name: Run Specmatic contract tests
+        run: java -jar specmatic.jar test
