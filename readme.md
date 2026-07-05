@@ -396,6 +396,10 @@ hosted in a special GitHub org: [spring-petclinic](https://github.com/spring-pet
 If you have a special interest in a different technology stack
 that could be used to implement the Pet Clinic then please join the community there.
 
+### API Coverage
+
+The current Specmatic run achieves ~6% coverage. Most non-2xx responses (e.g., 304, 400, 500) are marked "Examples Required" — Specmatic needs explicit examples to reliably test these paths, since they can't be generated from the spec alone. Achieving significantly higher coverage would require adding examples for each documented response across all endpoints, which is a larger effort beyond the current scope.
+
 # Contributing
 
 The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-rest/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
