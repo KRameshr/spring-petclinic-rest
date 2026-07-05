@@ -323,11 +323,10 @@ This project contains **non-regression tests** for the Petclinic API, built with
 
 ## Contract Testing with Specmatic
 
-This project uses [Specmatic](https://specmatic.io) for OpenAPI contract testing, validating that the running API stays true to the [OpenAPI spec](./src/main/resources/openapi.yml).
+This project uses [Specmatic](https://specmatic.io) for OpenAPI contract testing via JUnit 5, validating that the running API stays true to the [OpenAPI spec](./src/main/resources/openapi.yml).
 
 ### Prerequisites
 - Java 17+
-- The [Specmatic executable jar](https://github.com/specmatic/specmatic/releases)
 
 ### Running Contract Tests
 
@@ -336,16 +335,15 @@ This project uses [Specmatic](https://specmatic.io) for OpenAPI contract testing
    ./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
 ```
 
-2. In a separate terminal, run Specmatic tests using the `specmatic.yaml` config in the project root:
+2. In a separate terminal, run the contract tests via Maven:
 ```sh
-   java -jar /path/to/specmatic.jar test
+   ./mvnw test -Dtest=ContractTest
 ```
 
-Specmatic will read `specmatic.yaml`, load the OpenAPI spec, and run contract tests against `http://localhost:9966/petclinic/api`, reporting any mismatches between the spec and the actual API behavior.
+This runs `ContractTest.java` (`src/test/java/org/springframework/samples/petclinic/ContractTest.java`), which implements Specmatic's `SpecmaticContractTest` JUnit 5 interface. It reads `specmatic.yaml`, loads the OpenAPI spec, and runs contract tests against `http://localhost:9966/petclinic/api`, reporting any mismatches between the spec and actual API behavior. Results appear in the standard JUnit test output/reports.
 
 ### Configuration
-See [`specmatic.yaml`](./specmatic.yaml) for the Specmatic v3 configuration (system under test, spec path, and base URL).
-
+See [`specmatic.yaml`](./specmatic.yaml) for the Specmatic v3 configuration, and [`pom.xml`](./pom.xml) for the `io.specmatic:junit5-support` dependency.
 
 ## Interesting Spring Petclinic forks
 
