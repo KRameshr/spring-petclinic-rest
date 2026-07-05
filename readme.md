@@ -382,6 +382,10 @@ Running Specmatic against this API surfaced a few genuine gaps between the OpenA
 3. **Missing input validation**: Sending only mandatory fields (e.g., without `password`/`roles`) on `POST /users` returns a `500` instead of a proper `400 Bad Request`.
 4. **Random ID lookups**: Some generative tests use IDs not present in the in-memory H2 database, resulting in `404` responses; these can be reduced by supplying example-based IDs to Specmatic.
 
+### Example Validation
+
+An external example (`examples/get_owner_by_id.json`) was added to reduce false-positive 404s from generative tests using random IDs not present in the in-memory database. Since the project uses the Maven/JUnit integration (not the standalone CLI), example validity is confirmed via a successful `ContractTest` run — if the example were malformed or out of sync with the spec, the test run would fail with a config/parsing error rather than a normal test failure.
+
 ## Interesting Spring Petclinic forks
 
 The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
