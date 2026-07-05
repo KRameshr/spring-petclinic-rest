@@ -388,6 +388,10 @@ Running Specmatic against this API surfaced a few genuine gaps between the OpenA
 
 An external example (`examples/get_owner_by_id.json`) was added to reduce false-positive 404s from generative tests using random IDs not present in the in-memory database. Since the project uses the Maven/JUnit integration (not the standalone CLI), example validity is confirmed via a successful `ContractTest` run — if the example were malformed or out of sync with the spec, the test run would fail with a config/parsing error rather than a normal test failure.
 
+### API Coverage
+
+The current Specmatic run achieves ~6% coverage. Most non-2xx responses (e.g., 304, 400, 500) are marked "Examples Required" — Specmatic needs explicit examples to reliably test these paths, since they can't be generated from the spec alone. Achieving significantly higher coverage would require adding examples for each documented response across all endpoints, which is a larger effort beyond the current scope.
+
 ## Interesting Spring Petclinic forks
 
 The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
@@ -397,10 +401,6 @@ This [spring-petclinic-rest](https://github.com/spring-petclinic/spring-petclini
 hosted in a special GitHub org: [spring-petclinic](https://github.com/spring-petclinic).
 If you have a special interest in a different technology stack
 that could be used to implement the Pet Clinic then please join the community there.
-
-### API Coverage
-
-The current Specmatic run achieves ~6% coverage. Most non-2xx responses (e.g., 304, 400, 500) are marked "Examples Required" — Specmatic needs explicit examples to reliably test these paths, since they can't be generated from the spec alone. Achieving significantly higher coverage would require adding examples for each documented response across all endpoints, which is a larger effort beyond the current scope.
 
 # Contributing
 
