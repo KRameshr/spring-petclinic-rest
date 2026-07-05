@@ -373,6 +373,8 @@ This runs `ContractTest.java` (`src/test/java/org/springframework/samples/petcli
 
 See [`specmatic.yaml`](./specmatic.yaml) for the Specmatic v3 configuration, and [`pom.xml`](./pom.xml) for the `io.specmatic:junit5-support` dependency.
 
+Specmatic automatically runs schema resiliency tests (boundary values, negative datatypes) alongside positive-path tests — this explains the high test count (~6900+ scenarios) for a relatively small API surface.
+
 ### Findings from Contract Testing
 
 Running Specmatic against this API surfaced a few genuine gaps between the OpenAPI spec and the implementation:
