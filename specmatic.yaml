@@ -4,6 +4,10 @@ systemUnderTest:
     $ref: "#/components/services/petclinicService"
     runOptions:
       $ref: "#/components/runOptions/petclinicServiceTest"
+    data:
+      examples:
+        - directories:
+            - examples
 components:
   services:
     petclinicService:
