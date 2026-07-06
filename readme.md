@@ -347,7 +347,7 @@ zsh postman-tests.sh
 
 ## Contract Testing with Specmatic
 
-This project uses [Specmatic](https://specmatic.io) for OpenAPI contract testing via JUnit 5, validating that the running API stays true to the [OpenAPI spec](./src/main/resources/openapi.yml).
+This project integrates Specmatic contract testing with JUnit 5 to verify the running API against the OpenAPI specification at `src/main/resources/openapi.yml`.
 
 ### Prerequisites
 
@@ -355,42 +355,99 @@ This project uses [Specmatic](https://specmatic.io) for OpenAPI contract testing
 
 ### Running Contract Tests
 
-1. Start the application (see "Running Petclinic locally" above):
+1. Start the application:
 
 ```sh
-   ./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
+./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
 ```
 
-2. In a separate terminal, run the contract tests via Maven:
+On Windows CMD, use:
+
+```cmd
+mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
+```
+
+2. In a separate terminal, run the Specmatic contract tests:
 
 ```sh
-   ./mvnw test -Dtest=ContractTest
+./mvnw test -Dtest=ContractTest
 ```
 
-This runs `ContractTest.java` (`src/test/java/org/springframework/samples/petclinic/ContractTest.java`), which implements Specmatic's `SpecmaticContractTest` JUnit 5 interface. It reads `specmatic.yaml`, loads the OpenAPI spec, and runs contract tests against `http://localhost:9966/petclinic/api`, reporting any mismatches between the spec and actual API behavior. Results appear in the standard JUnit test output/reports.
+On Windows PowerShell, use:
+
+```powershell
+.\mvnw.cmd test -Dtest=ContractTest
+```
+
+The test class `src/test/java/org/springframework/samples/petclinic/ContractTest.java` implements Specmatic's `SpecmaticContractTest` JUnit 5 interface. Specmatic reads `specmatic.yaml`, loads the OpenAPI specification, and tests the running service at `http://localhost:9966/petclinic/api`.
 
 ### Configuration
 
-See [`specmatic.yaml`](./specmatic.yaml) for the Specmatic v3 configuration, and [`pom.xml`](./pom.xml) for the `io.specmatic:junit5-support` dependency.
+The integration uses:
 
-Specmatic automatically runs schema resiliency tests (boundary values, negative datatypes) alongside positive-path tests — this explains the high test count (~6900+ scenarios) for a relatively small API surface.
+- `specmatic.yaml` - Specmatic v3 configuration
+- `pom.xml` - `io.specmatic:junit5-support` test dependency
+- `src/test/java/org/springframework/samples/petclinic/ContractTest.java` - programmatic JUnit 5 entry point
+- `src/main/resources/openapi.yml` - OpenAPI contract
+- `src/main/resources/openapi_examples/` - external request/response examples
 
-### Findings from Contract Testing
+Schema resiliency testing is enabled with:
 
-Running Specmatic against this API surfaced a few genuine gaps between the OpenAPI spec and the implementation:
+```yaml
+schemaResiliencyTests: all
+```
 
-1. **POST /users response code**: The spec originally documented `200`, but the API returns `201 Created` (fixed in the spec to match).
-2. **Role name length**: The backend prepends a `"ROLE_"` prefix to role names, which can push the value past the spec's `maxLength: 80` for long inputs — a validation gap worth addressing in the app.
-3. **Missing input validation**: Sending only mandatory fields (e.g., without `password`/`roles`) on `POST /users` returns a `500` instead of a proper `400 Bad Request`.
-4. **Random ID lookups**: Some generative tests use IDs not present in the in-memory H2 database, resulting in `404` responses; these can be reduced by supplying example-based IDs to Specmatic.
+This generates additional boundary and negative-data scenarios from the schemas in the OpenAPI contract.
 
-### Example Validation
+### Current Test Findings
 
-An external example (`examples/get_owner_by_id.json`) was added to reduce false-positive 404s from generative tests using random IDs not present in the in-memory database. Since the project uses the Maven/JUnit integration (not the standalone CLI), example validity is confirmed via a successful `ContractTest` run — if the example were malformed or out of sync with the spec, the test run would fail with a config/parsing error rather than a normal test failure.
+A local schema-resiliency run generated 302 test scenarios. The run currently exposes contract and test-data mismatches that still require investigation rather than being treated as a fully passing suite.
 
-### API Coverage
+Observed findings include:
 
-The current Specmatic run achieves ~6% coverage. Most non-2xx responses (e.g., 304, 400, 500) are marked "Examples Required" — Specmatic needs explicit examples to reliably test these paths, since they can't be generated from the spec alone. Achieving significantly higher coverage would require adding examples for each documented response across all endpoints, which is a larger effort beyond the current scope.
+1. Some generated positive-response scenarios use valid schema-range IDs for resources that do not exist in the H2 test database, producing `404 Not Found`.
+2. Some create operations return a different success status than documented by the corresponding OpenAPI response.
+3. Some generated request bodies are rejected with `400 Bad Request`, revealing validation or contract-alignment gaps.
+4. Some generated requests produce `500 Internal Server Error`, indicating missing defensive validation or implementation gaps.
+5. Several documented non-2xx responses are skipped with `Examples Required` until explicit examples are supplied.
+
+These failures are retained as findings from contract testing and should be investigated rather than hidden by weakening the contract or disabling resiliency testing.
+
+### External Examples
+
+External Specmatic examples are stored in:
+
+```text
+src/main/resources/openapi_examples/
+```
+
+Examples cover multiple owner, pet, pet type, specialty, vet, visit, and user operations. They provide deterministic request/response cases in addition to generated contract scenarios.
+
+### Test Reports
+
+Specmatic generates an HTML report at:
+
+```text
+build/reports/specmatic/test/html/index.html
+```
+
+Open this report locally in a browser to inspect API coverage and scenarios that require additional examples.
+
+### Continuous Integration
+
+Specmatic contract tests are integrated into GitHub Actions through:
+
+```text
+.github/workflows/specmatic.yml
+```
+
+The workflow starts the application with the H2 and Spring Data JPA profiles and runs:
+
+```sh
+./mvnw test -Dtest=ContractTest
+```
+
+This keeps CI aligned with the JUnit 5 programmatic test setup and does not require a standalone Specmatic executable JAR.
 
 ## Interesting Spring Petclinic forks
 
