@@ -1,0 +1,16 @@
+{
+    "http-request":  {
+                         "method":  "PUT",
+                         "path": "/pettypes/1",
+                         "body":  {
+                                      "name":  "cat"
+                                  },
+                         "headers":  {
+                                         "Content-Type":  "application/json"
+                                     }
+                     },
+    "http-response":  {
+                          "status":  200
+                      }
+}
+

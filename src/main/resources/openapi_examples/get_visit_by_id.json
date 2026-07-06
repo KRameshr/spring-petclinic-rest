@@ -1,0 +1,5 @@
+{
+  "http-request": { "method": "GET", "path": "/visits/2" },
+  "http-response": { "status": 200 }
+}
+

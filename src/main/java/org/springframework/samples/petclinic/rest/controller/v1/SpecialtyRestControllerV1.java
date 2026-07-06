@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.samples.petclinic.rest.controller.v1;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,33 +21,27 @@ import org.springframework.samples.petclinic.mapper.SpecialtyMapper;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.rest.api.SpecialtiesApi;
 import org.springframework.samples.petclinic.rest.dto.SpecialtyDto;
+import org.springframework.samples.petclinic.rest.dto.SpecialtyFieldsDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * @author Vitaliy Fedoriv
  */
-
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("api")
 public class SpecialtyRestControllerV1 implements SpecialtiesApi {
-
     private final ClinicService clinicService;
-
     private final SpecialtyMapper specialtyMapper;
-
     public SpecialtyRestControllerV1(ClinicService clinicService, SpecialtyMapper specialtyMapper) {
         this.clinicService = clinicService;
         this.specialtyMapper = specialtyMapper;
     }
-
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
     public ResponseEntity<List<SpecialtyDto>> listSpecialties() {
@@ -60,7 +52,6 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
         }
         return new ResponseEntity<>(specialties, HttpStatus.OK);
     }
-
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
     public ResponseEntity<SpecialtyDto> getSpecialty(Integer specialtyId) {
@@ -70,17 +61,15 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
         }
         return new ResponseEntity<>(specialtyMapper.toSpecialtyDto(specialty), HttpStatus.OK);
     }
-
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<SpecialtyDto> addSpecialty(SpecialtyDto specialtyDto) {
+    public ResponseEntity<SpecialtyDto> addSpecialty(SpecialtyFieldsDto specialtyDto) {
         HttpHeaders headers = new HttpHeaders();
         Specialty specialty = specialtyMapper.toSpecialty(specialtyDto);
         this.clinicService.saveSpecialty(specialty);
         headers.setLocation(UriComponentsBuilder.newInstance().path("/api/specialties/{id}").buildAndExpand(specialty.getId()).toUri());
         return new ResponseEntity<>(specialtyMapper.toSpecialtyDto(specialty), headers, HttpStatus.CREATED);
     }
-
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
     public ResponseEntity<SpecialtyDto> updateSpecialty(Integer specialtyId, SpecialtyDto specialtyDto) {
@@ -92,7 +81,6 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
         this.clinicService.saveSpecialty(currentSpecialty);
         return new ResponseEntity<>(specialtyMapper.toSpecialtyDto(currentSpecialty), HttpStatus.NO_CONTENT);
     }
-
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Transactional
     @Override
@@ -104,5 +92,4 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
         this.clinicService.deleteSpecialty(specialty);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

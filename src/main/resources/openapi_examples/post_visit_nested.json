@@ -1,0 +1,17 @@
+{
+    "http-request":  {
+                         "method":  "POST",
+                         "path": "/owners/1/pets/1/visits",
+                         "body":  {
+                                      "date":  "2013-01-01",
+                                      "description":  "rabies shot"
+                                  },
+                         "headers":  {
+                                         "Content-Type":  "application/json"
+                                     }
+                     },
+    "http-response":  {
+                          "status":  201
+                      }
+}
+

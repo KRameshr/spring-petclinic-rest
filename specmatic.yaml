@@ -1,13 +1,17 @@
 version: 3
+
+specmatic:
+  settings:
+    test:
+      schemaResiliencyTests: none
+      maxTestRequestCombinations: 1
+
 systemUnderTest:
   service:
     $ref: "#/components/services/petclinicService"
     runOptions:
       $ref: "#/components/runOptions/petclinicServiceTest"
-    data:
-      examples:
-        - directories:
-            - examples
+
 components:
   services:
     petclinicService:
@@ -20,6 +24,11 @@ components:
             source:
               filesystem:
                 directory: src/main/resources
+      data:
+        examples:
+          - directories:
+              - src/main/resources/openapi_examples
+
   runOptions:
     petclinicServiceTest:
       openapi:

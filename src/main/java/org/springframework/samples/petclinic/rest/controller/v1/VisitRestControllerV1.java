@@ -74,13 +74,13 @@ public class VisitRestControllerV1 implements VisitsApi {
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override
-    public ResponseEntity<VisitDto> addVisit(VisitDto visitDto) {
+    public ResponseEntity<VisitDto> addVisit(VisitFieldsDto visitDto) {
         HttpHeaders headers = new HttpHeaders();
         Visit visit = visitMapper.toVisit(visitDto);
         this.clinicService.saveVisit(visit);
-        visitDto = visitMapper.toVisitDto(visit);
+        VisitDto savedVisitDto = visitMapper.toVisitDto(visit);
         headers.setLocation(UriComponentsBuilder.newInstance().path("/api/visits/{id}").buildAndExpand(visit.getId()).toUri());
-        return new ResponseEntity<>(visitDto, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedVisitDto, headers, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")

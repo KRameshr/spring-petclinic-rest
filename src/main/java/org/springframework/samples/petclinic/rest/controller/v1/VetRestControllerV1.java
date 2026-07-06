@@ -28,6 +28,7 @@ import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.samples.petclinic.rest.dto.VetFieldsDto;
 
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class VetRestControllerV1 implements VetsApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<VetDto> addVet(VetDto vetDto) {
+    public ResponseEntity<VetDto> addVet(VetFieldsDto vetDto) {
         HttpHeaders headers = new HttpHeaders();
         Vet vet = vetMapper.toVet(vetDto);
         if(vet.getNrOfSpecialties() > 0){
