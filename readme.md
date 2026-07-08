@@ -345,108 +345,32 @@ zsh postman-tests.sh
 `
   > Note: You can use your currently bash installed. Like: "bash postman-tests.sh"
 
-## Contract Testing with Specmatic
+## Contract Testing with [Specmatic](https://specmatic.io)
 
-This project integrates Specmatic contract testing with JUnit 5 to verify the running API against the OpenAPI specification at `src/main/resources/openapi.yml`.
-
-### Prerequisites
-
-- Java 17+
+This project uses [Specmatic](https://specmatic.io) with JUnit 5 to contract-test the running API against `src/main/resources/openapi.yml`.
 
 ### Running Contract Tests
 
-1. Start the application:
+1. Start the app: `./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"` (Windows: `mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"`)
+2. In a separate terminal, run: `./mvnw test -Dtest=ContractTest` (Windows: `.\mvnw.cmd test -Dtest=ContractTest`)
 
-```sh
-./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
-```
+`ContractTest.java` implements Specmatics `SpecmaticContractTest` JUnit 5 interface, which reads `specmatic.yaml`, loads the OpenAPI spec, and tests `http://localhost:9966/petclinic/api`.
 
-On Windows CMD, use:
+### Results
 
-```cmd
-mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"
-```
+Latest run: 63 scenarios, **50 passing, 13 failing** (79%). Specmatic surfaced and helped fix several real issues:
+- Overly-tight `maximum` constraints on response `id` fields that broke as new rows were created
+- Path-parameter bounds that did not match the seed data
+- Status code mismatches (some PUT endpoints return 204/201 but were documented as 200)
+- Missing `required` fields on `User` (password/roles/enabled), which the app rejected with 500/404
 
-2. In a separate terminal, run the Specmatic contract tests:
+**Remaining 13 failures** are a known limitation: DELETE scenarios run against a live, unreset H2 database, so a delete in one scenario can remove data another scenario in the same run still expects. This is a test-isolation gap, not a contract gap, and is tracked as follow-up work.
 
-```sh
-./mvnw test -Dtest=ContractTest
-```
+### Other Notes
 
-On Windows PowerShell, use:
-
-```powershell
-.\mvnw.cmd test -Dtest=ContractTest
-```
-
-The test class `src/test/java/org/springframework/samples/petclinic/ContractTest.java` implements Specmatic's `SpecmaticContractTest` JUnit 5 interface. Specmatic reads `specmatic.yaml`, loads the OpenAPI specification, and tests the running service at `http://localhost:9966/petclinic/api`.
-
-### Configuration
-
-The integration uses:
-
-- `specmatic.yaml` - Specmatic v3 configuration
-- `pom.xml` - `io.specmatic:junit5-support` test dependency
-- `src/test/java/org/springframework/samples/petclinic/ContractTest.java` - programmatic JUnit 5 entry point
-- `src/main/resources/openapi.yml` - OpenAPI contract
-- `src/main/resources/openapi_examples/` - external request/response examples
-
-Schema resiliency testing is enabled with:
-
-```yaml
-schemaResiliencyTests: none
-```
-
-This generates additional boundary and negative-data scenarios from the schemas in the OpenAPI contract.
-
-### Current Test Findings
-
-The most recent local Contract Test run (with schemaResiliencyTests: none) executed 63 scenarios: **50 passing, 13 failing** (79% pass rate).
-
-During this integration, Specmatic surfaced and helped fix several real contract/implementation mismatches, including:
-
-1. **Incorrect maximum constraints on response id fields** (Owner, Pet, Vet, PetType, Visit, Specialty) - these were bounded to the seed-data row count (e.g. maximum: 3), which broke as soon as a new row was created or an unrelated ID appeared in a response. Fixed by relaxing these to a realistic upper bound.
-2. **Incorrect path-parameter bounds** - some petId/ownerId/petTypeId parameters had ranges that did not match the actual seed data (e.g. reused an owner range for a pet parameter).
-3. **HTTP status code mismatches** - several PUT update endpoints (pettypes, visits, specialties, vets) return 204 No Content in the running application but were documented as 200 in the spec; POST create endpoints for vets/specialties return 201 Created but were documented as 200. The OpenAPI contract and corresponding controllers were aligned to 204/201 as appropriate.
-4. **Missing required fields on User** - password, roles, and enabled were not marked required, letting Specmatic generate a mandatory-keys-only request that the application then rejected with a 500/404 (missing role list, null enabled violating a NOT NULL DB constraint). Marking these fields required in the contract surfaces this expectation explicitly.
-
-**Known limitation (13 remaining failures):** All remaining failures stem from one root cause - this API is tested directly against a live, stateful H2 database with no reset between scenarios. Specmatics boundary-value generation exercises both ends of any declared range for DELETE operations, so a DELETE scenario can consume a resource (or a resource it cascades to) that a later GET/PUT/POST scenario in the same run still expects to exist, producing an unavoidable 404. This is a consequence of running generative contract tests against a single mutable database rather than a gap in the contract itself; a full fix would require an application-level test-data reset hook between scenarios, which is tracked as follow-up work.
-
-### External Examples
-
-External Specmatic examples are stored in:
-
-```text
-src/main/resources/openapi_examples/
-```
-
-Examples cover multiple owner, pet, pet type, specialty, vet, visit, and user operations. They provide deterministic request/response cases in addition to generated contract scenarios.
-
-### Test Reports
-
-Specmatic generates an HTML report at:
-
-```text
-build/reports/specmatic/test/html/index.html
-```
-
-Open this report locally in a browser to inspect API coverage and scenarios that require additional examples.
-
-### Continuous Integration
-
-Specmatic contract tests are integrated into GitHub Actions through:
-
-```text
-.github/workflows/specmatic.yml
-```
-
-The workflow starts the application with the H2 and Spring Data JPA profiles and runs:
-
-```sh
-./mvnw test -Dtest=ContractTest
-```
-
-This keeps CI aligned with the JUnit 5 programmatic test setup and does not require a standalone Specmatic executable JAR.
+- External examples: `src/main/resources/openapi_examples/`
+- HTML report: `build/reports/specmatic/test/html/index.html`
+- CI: runs via `.github/workflows/specmatic.yml`
 
 ## Interesting Spring Petclinic forks
 
