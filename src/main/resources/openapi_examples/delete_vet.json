@@ -1,5 +1,5 @@
 {
-  "http-request": { "method": "DELETE", "path": "/vets/1" },
+  "http-request": { "method": "DELETE", "path": "/vets/6" },
   "http-response": { "status": 200 }
 }
 

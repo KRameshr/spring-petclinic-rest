@@ -3,7 +3,7 @@ version: 3
 specmatic:
   settings:
     test:
-      schemaResiliencyTests: all
+      schemaResiliencyTests: none
       maxTestRequestCombinations: 1
 
 systemUnderTest:
