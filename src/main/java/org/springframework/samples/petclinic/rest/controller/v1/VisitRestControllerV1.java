@@ -41,7 +41,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("api")
 public class VisitRestControllerV1 implements VisitsApi {
 
-
 private final ClinicService clinicService;
 
 private final VisitMapper visitMapper;
