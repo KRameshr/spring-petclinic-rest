@@ -52,13 +52,13 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     get:
@@ -99,7 +99,7 @@ paths:
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /v2/owners:
@@ -161,13 +161,13 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /owners/{ownerId}:
@@ -210,19 +210,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Owner not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -259,19 +259,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Owner not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
@@ -312,19 +312,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Owner  not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /owners/{ownerId}/pets:
@@ -362,19 +362,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet or Owner not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /owners/{ownerId}/pets/{petId}:
@@ -427,19 +427,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Owner or pet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -483,19 +483,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet not found for this owner.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /owners/{ownerId}/pets/{petId}/visits:
@@ -543,19 +543,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet not found for this owner.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /pettypes:
@@ -589,7 +589,7 @@ paths:
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     post:
@@ -627,19 +627,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet Type not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /pettypes/{petTypeId}:
@@ -682,19 +682,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet Type not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -734,19 +734,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet Type not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     delete:
@@ -786,19 +786,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet type not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
@@ -833,7 +833,7 @@ paths:
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /v2/pets:
@@ -881,13 +881,13 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
@@ -931,19 +931,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -992,19 +992,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     delete:
@@ -1044,19 +1044,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Pet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /visits:
@@ -1090,7 +1090,7 @@ paths:
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     post:
@@ -1104,7 +1104,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VisitFields"
+              $ref: "#/components/schemas/VisitCreate"
         required: true
       responses:
         200:
@@ -1128,19 +1128,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Visit not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /visits/{visitId}:
@@ -1183,19 +1183,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Visit not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -1235,19 +1235,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Visit not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     delete:
@@ -1287,19 +1287,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Visit not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /specialties:
@@ -1333,7 +1333,7 @@ paths:
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     post:
@@ -1371,19 +1371,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Specialty not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /specialties/{specialtyId}:
@@ -1426,19 +1426,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Specialty not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -1478,19 +1478,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Specialty not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     delete:
@@ -1530,19 +1530,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Specialty not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /vets:
@@ -1576,10 +1576,9 @@ paths:
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
-
     post:
       tags:
         - vets
@@ -1615,19 +1614,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Vet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /vets/{vetId}:
@@ -1670,19 +1669,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Vet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     put:
@@ -1727,19 +1726,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Vet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
     delete:
@@ -1779,21 +1778,22 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: Vet not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+
   /users:
     post:
       tags:
@@ -1830,19 +1830,19 @@ paths:
         400:
           description: Bad request.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         404:
           description: User not found.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         500:
           description: Server error.
           content:
-            application/json:
+            "application/problem+json":
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 components:
@@ -1880,6 +1880,13 @@ components:
           description: The long error message.
           type: string
           example: "No static resource api/owner."
+          readOnly: true
+        instance:
+          title: Instance
+          description: URI identifying the specific occurrence of the problem.
+          type: string
+          format: uri-reference
+          example: "/petclinic/api/v2/owners"
           readOnly: true
         timestamp:
           title: Timestamp
@@ -2256,6 +2263,23 @@ components:
       required:
         - date
         - description
+    VisitCreate:
+      title: Visit create request
+      description: Fields required to create a vet visit.
+      allOf:
+        - $ref: "#/components/schemas/VisitFields"
+        - type: object
+          properties:
+            petId:
+              title: Pet ID
+              description: The ID of the pet.
+              type: integer
+              format: int32
+              minimum: 1
+              maximum: 1000
+              example: 1
+          required:
+            - petId
     Visit:
       title: Visit
       description: A booking for a vet visit.
@@ -2310,7 +2334,7 @@ components:
               type: integer
               format: int32
               minimum: 1
-              maximum: 1000
+              maximum: 7
               example: 1
           required:
             - id

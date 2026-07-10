@@ -16,96 +16,129 @@
 
 package org.springframework.samples.petclinic.rest.controller.v1;
 
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.mapper.VisitMapper;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.rest.api.VisitsApi;
+import org.springframework.samples.petclinic.rest.dto.VisitCreateDto;
 import org.springframework.samples.petclinic.rest.dto.VisitDto;
 import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import jakarta.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * @author Vitaliy Fedoriv
- */
 
 @RestController
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("api")
 public class VisitRestControllerV1 implements VisitsApi {
 
-    private final ClinicService clinicService;
 
-    private final VisitMapper visitMapper;
+private final ClinicService clinicService;
 
-    public VisitRestControllerV1(ClinicService clinicService, VisitMapper visitMapper) {
-        this.clinicService = clinicService;
-        this.visitMapper = visitMapper;
+private final VisitMapper visitMapper;
+
+public VisitRestControllerV1(ClinicService clinicService, VisitMapper visitMapper) {
+    this.clinicService = clinicService;
+    this.visitMapper = visitMapper;
+}
+
+@PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+@Override
+public ResponseEntity<List<VisitDto>> listVisits() {
+    List<Visit> visits = new ArrayList<>(this.clinicService.findAllVisits());
+
+    if (visits.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    return new ResponseEntity<>(
+        new ArrayList<>(visitMapper.toVisitsDto(visits)),
+        HttpStatus.OK
+    );
+}
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<List<VisitDto>> listVisits() {
-        List<Visit> visits = new ArrayList<>(this.clinicService.findAllVisits());
-        if (visits.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(new ArrayList<>(visitMapper.toVisitsDto(visits)), HttpStatus.OK);
+@PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+@Override
+public ResponseEntity<VisitDto> getVisit(Integer visitId) {
+    Visit visit = this.clinicService.findVisitById(visitId);
+
+    if (visit == null) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<VisitDto> getVisit( Integer visitId) {
-        Visit visit = this.clinicService.findVisitById(visitId);
-        if (visit == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(visitMapper.toVisitDto(visit), HttpStatus.OK);
+    return new ResponseEntity<>(
+        visitMapper.toVisitDto(visit),
+        HttpStatus.OK
+    );
+}
+
+@PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+@Override
+public ResponseEntity<VisitDto> addVisit(VisitCreateDto visitDto) {
+    HttpHeaders headers = new HttpHeaders();
+
+    Visit visit = visitMapper.toVisit(visitDto);
+    this.clinicService.saveVisit(visit);
+
+    VisitDto savedVisitDto = visitMapper.toVisitDto(visit);
+
+    headers.setLocation(
+        UriComponentsBuilder.newInstance()
+            .path("/api/visits/{id}")
+            .buildAndExpand(visit.getId())
+            .toUri()
+    );
+
+    return new ResponseEntity<>(
+        savedVisitDto,
+        headers,
+        HttpStatus.CREATED
+    );
+}
+
+@PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+@Override
+public ResponseEntity<Void> updateVisit(
+    Integer visitId,
+    VisitFieldsDto visitDto
+) {
+    Visit currentVisit = this.clinicService.findVisitById(visitId);
+
+    if (currentVisit == null) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<VisitDto> addVisit(VisitFieldsDto visitDto) {
-        HttpHeaders headers = new HttpHeaders();
-        Visit visit = visitMapper.toVisit(visitDto);
-        this.clinicService.saveVisit(visit);
-        VisitDto savedVisitDto = visitMapper.toVisitDto(visit);
-        headers.setLocation(UriComponentsBuilder.newInstance().path("/api/visits/{id}").buildAndExpand(visit.getId()).toUri());
-        return new ResponseEntity<>(savedVisitDto, headers, HttpStatus.CREATED);
+    currentVisit.setDate(visitDto.getDate());
+    currentVisit.setDescription(visitDto.getDescription());
+
+    this.clinicService.saveVisit(currentVisit);
+
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+}
+
+@PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+@Transactional
+@Override
+public ResponseEntity<VisitDto> deleteVisit(Integer visitId) {
+    Visit visit = this.clinicService.findVisitById(visitId);
+
+    if (visit == null) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<Void> updateVisit(Integer visitId, VisitFieldsDto visitDto) {
-        Visit currentVisit = this.clinicService.findVisitById(visitId);
-        if (currentVisit == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentVisit.setDate(visitDto.getDate());
-        currentVisit.setDescription(visitDto.getDescription());
-        this.clinicService.saveVisit(currentVisit);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    this.clinicService.deleteVisit(visit);
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<VisitDto> deleteVisit(Integer visitId) {
-        Visit visit = this.clinicService.findVisitById(visitId);
-        if (visit == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deleteVisit(visit);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+}
+
 
 }
