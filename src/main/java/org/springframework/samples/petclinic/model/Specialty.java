@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Models a {@link Vet Vet's} specialty (for example, dentistry).
@@ -26,5 +27,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "specialties")
 public class Specialty extends NamedEntity {
+
+    @Override
+    public Integer getId() {
+        return super.getId();
+    }
 
 }

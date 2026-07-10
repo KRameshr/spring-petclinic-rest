@@ -2,4 +2,3 @@
   "http-request": { "method": "DELETE", "path": "/owners/10" },
   "http-response": { "status": 200 }
 }
-
