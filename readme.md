@@ -38,7 +38,7 @@ There is an actuator health check route as well:
 
 - [http://localhost:9966/petclinic/actuator/health](http://localhost:9966/petclinic/actuator/health)
 
-## ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬â€œ OpenAPI REST API Documentation
+## ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ OpenAPI REST API Documentation
 
 This project provides a RESTful API for managing a veterinary clinic's **owners, pets, veterinarians, visits, and specialties**.
 
@@ -48,7 +48,7 @@ Swagger UI is available at: [http://localhost:9966/petclinic/swagger-ui.html](ht
 
 API documentation (OAS 3.1) is accessible at: [http://localhost:9966/petclinic/v3/api-docs](http://localhost:9966/petclinic/v3/api-docs).
 
-## ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…â€™ API Endpoints Overview
+## ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ API Endpoints Overview
 
 | **Method**      | **Endpoint**                                | **Description**                  |
 | --------------- | ------------------------------------------- | -------------------------------- |
@@ -56,10 +56,10 @@ API documentation (OAS 3.1) is accessible at: [http://localhost:9966/petclinic/v
 | **GET**         | `/api/owners`                               | Retrieve all pet owners          |
 | **GET**         | `/api/owners/{ownerId}`                     | Get a pet owner by ID            |
 | **POST**        | `/api/owners`                               | Add a new pet owner              |
-| **PUT**         | `/api/owners/{ownerId}`                     | Update an ownerÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s details        |
+| **PUT**         | `/api/owners/{ownerId}`                     | Update an ownerÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢s details        |
 | **DELETE**      | `/api/owners/{ownerId}`                     | Delete an owner                  |
-| **GET**         | `/api/owners/{ownerId}/pets/{petId}`        | Get a pet by ID (ownerÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s pet)    |
-| **PUT**         | `/api/owners/{ownerId}/pets/{petId}`        | Update pet details (ownerÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s pet) |
+| **GET**         | `/api/owners/{ownerId}/pets/{petId}`        | Get a pet by ID (ownerÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢s pet)    |
+| **PUT**         | `/api/owners/{ownerId}/pets/{petId}`        | Update pet details (ownerÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢s pet) |
 | **POST**        | `/api/owners/{ownerId}/pets`                | Add a new pet to an owner        |
 | **POST**        | `/api/owners/{ownerId}/pets/{petId}/visits` | Add a vet visit for a pet        |
 | **Pets**        |                                             |                                  |
@@ -151,7 +151,7 @@ For more details, see the [Spring Boot documentation](https://docs.spring.io/spr
 ### **Using HSQLDB**
 
 - HSQLDB works similarly to H2 as an **in-memory database**.
-- No additional setup is requiredÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âschema and sample data are loaded automatically from `src/main/resources/db/hsqldb/`.
+- No additional setup is requiredÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âschema and sample data are loaded automatically from `src/main/resources/db/hsqldb/`.
 - Swtich to **HSQLDB** by modifying `application.properties`:
 
   ```properties
@@ -354,52 +354,44 @@ This project uses [Specmatic](https://specmatic.io) v2.50.0 with JUnit 5 to cont
 1. Start the app: `./mvnw spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"` (Windows: `mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=h2,spring-data-jpa"`)
 2. In a separate terminal, run: `./mvnw test -Dtest=ContractTest` (Windows: `.\mvnw.cmd test -Dtest=ContractTest`)
 
-`ContractTest.java` implements Specmatic's `SpecmaticContractTest` JUnit 5 interface, which reads `specmatic.yaml`, loads the OpenAPI spec, and tests `http://localhost:9966/petclinic/api` directly over HTTP (no Spring test context is involved).
+`ContractTest.java` implements Specmatic's `SpecmaticContractTest` JUnit 5 interface, which reads `specmatic.yaml`, loads the OpenAPI spec, and tests `http://localhost:9966/petclinic/api` directly over HTTP.
 
 ### Results
 
-Latest run (clean DB, immediately after app startup): **221 scenarios, 213 passing, 7 failing** (~96%).
+**221 scenarios, 214 passing, 7 failing (~97%)**, measured on a clean DB immediately after startup.
 
-Specmatic surfaced and helped fix several real issues, including:
-- Overly-tight `maximum` constraints on response `id` fields that broke as new rows were created
+Issues found and fixed:
+- Overly-tight `maximum` constraints on response `id` fields
 - Status code mismatches (some PUT endpoints return 204/201 but were documented as 200)
-- Missing `required` fields on `User` (password/roles/enabled), which the app rejected with 500/404
-- A missing `petId` in the `POST /visits` request schema, which caused every generated request to fail with a data-integrity violation (fixed by introducing a request-only `VisitCreate` schema, wired through a new MapStruct mapping and controller signature)
+- Missing `required` fields on `User` (password/roles/enabled)
+- Missing `petId` in the `POST /visits` request schema, causing every generated request to fail (fixed via a new request-only `VisitCreate` schema + mapper + controller change)
 
-### Remaining 7 failures - root cause and why they're not yet fixed
+### Remaining 7 failures: root cause
 
-All 7 remaining failures (the 6 positive DELETE scenarios, plus `POST /visits`) share the same root cause:
+The 6 positive DELETE scenarios and `POST /visits` all fail for the same reason: Specmatic generates a random ID for these operations (the 6 DELETEs have no `minimum`/`maximum` on their ID parameter, unlike sibling GET/PUT operations; `POST /visits` generates a random `petId`), and that ID almost never matches a real seeded row, so the app correctly returns 404 instead of the expected 200.
 
-- Six DELETE operations (`deleteOwner`, `deletePetType`, `deletePet`, `deleteVisit`, `deleteSpecialty`, `deleteVet`) declare their ID path parameter as an unbounded `integer` with only an `example` value - no `minimum`/`maximum`, unlike their sibling GET/PUT operations for the same resource. Specmatic therefore generates a fully random int32 for the positive-case ID, which almost never matches a real row, producing a 404 instead of the expected 200.
-- `POST /visits` has the same underlying issue: once `petId` is present in the request (see the fix above), Specmatic generates a schema-valid `petId` (1-1000) that usually does not correspond to a real pet, again producing a 404.
+**This isn't a simple schema fix.** Adding proper ID bounds does make Specmatic pick a valid ID - but `ContractTest` runs against a live, already-running app over plain HTTP with no per-scenario DB reset. Once a DELETE actually succeeds, it permanently removes real seed data, which cascades into 20+ unrelated failures later in the same run. This was confirmed in two separate experiments (schema bounds alone, and schema bounds + a named example tying a specific ID to the scenario) - both reproduced the same cascade. A related, independent bug also surfaced: `deleteOwner` returns `200` with an empty body, but the spec declares a full `Owner` response schema.
 
-**Why this isn't a one-line schema fix:** adding matching `minimum`/`maximum` bounds to the DELETE parameters (mirroring the sibling GET/PUT operations) was tried as an experiment and did make Specmatic generate in-range, schema-valid IDs. However, `ContractTest` runs directly against a live, external, already-running Spring Boot instance (via `SpecmaticContractTest`, over plain HTTP) with no per-scenario database reset. Once the DELETE could actually succeed against a real seed ID, it permanently removed that row (and its dependent pets/visits) from the database, which then cascaded into 20+ unrelated failures later in the same run (GET/UPDATE/ADD scenarios for that same owner's pets and visits). The experiment was reverted; the schema files in this repo intentionally still reflect the original, unbounded state for these 6 parameters.
+Fixing this properly requires **test isolation** (resetting the DB between scenarios), which is a test-infrastructure change outside this pass's scope. Tracked as follow-up work.
 
-Fixing this properly requires addressing **test isolation** - e.g. resetting the H2 database to its seed state before/between scenarios - which is a test-infrastructure change orthogonal to the OpenAPI contract itself, and is out of scope for this pass. It is tracked as follow-up work.
+### Examples Validation
 
-**This was confirmed experimentally.** As a targeted test, a dedicated 'throwaway' seed row was added for each of the 6 DELETE resources (an owner, pet, pet type, visit, specialty, and vet with no other test dependencies), matching schema maximum values were widened to include them, and a named examples: block (DELETE_OWNER_SUCCESS, tying the parameter value to a full response body) was wired in for deleteOwner specifically. This surfaced a **second, independent bug**: the `deleteOwner` controller returns 200 OK with an empty body, but the OpenAPI spec's 200 response for this operation declares a full Owner JSON schema - a genuine, pre-existing spec/implementation mismatch unrelated to ID generation. More importantly, once the named example let Specmatic target a real, valid ID, the DELETE call **actually succeeded** and permanently removed that row - which, exactly as predicted, cascaded into 20 additional unrelated failures (GET/UPDATE/ADD scenarios for other owners, pets, pet types, and visits later in the same run). All of these experimental changes (schema bounds, seed data, named examples) were reverted; the repository is back to the clean 221/214/7 baseline. This is now a 3-for-3 confirmed result: schema-bounds-only, and now schema-bounds-plus-named-examples, both independently reproduce the same test-isolation cascade the moment a DELETE is allowed to succeed for real.
+`specmatic examples validate` found **23 of 27 example files invalid**:
+- **~17 files**: response declared with no body, but the spec expects a full JSON object (same root cause as the DELETE examples above)
+- **5 files** (`post_specialty`, `post_vet`, `put_pettype`, `put_specialty`, `put_vet`, `put_visit`): don't match any operation in the current spec, likely stale
+- **1 file** (`post_owner`): missing the required `pets` property
 
-### Examples Validation (specmatic examples validate)
-
-Running `docker run --rm -v "${PWD}:/usr/src/app" specmatic/specmatic examples validate --spec-file src/main/resources/openapi.yml` against this spec found **23 of 27 example files invalid**. Only 4 pass. Breakdown:
-
-- **Body/schema mismatch (R1001), ~17 files** - most get_*, post_*, put_*, and all six delete_* example files declare a response with no body ({"status": 200}), but the spec's response schema for that operation expects a full JSON object. This is the same root cause documented above for the DELETE examples specifically, but it affects many non-DELETE example files too.
-- **`No matching specification found`, 5 files** - `post_specialty.json`, `post_vet.json`, `put_pettype.json`, `put_specialty.json`, `put_vet.json`, `put_visit.json` do not correspond to any operation/path/method combination in the current spec (likely stale, left over from an earlier version of the API).
-- **Missing required property, 1 file** - `post_owner.json`'s response is missing the required `pets` property.
-
-Fixing these is a separate, sizeable body of work from the test-isolation issue above and was not attempted in this pass; it is tracked as follow-up work.
+Tracked as follow-up work.
 
 ### API Coverage
 
-The Specmatic HTML report (see below) currently shows **37% coverage** (7/18 paths, 7/36 operations, 7/159 responses exercised), with 93 scenarios skipped. The skips are almost entirely `T00002: Examples Required` - i.e. non-200 response codes (304, 404, 500, etc.) across most endpoints have no example wired up, so Specmatic has nothing to test them with. Reaching materially higher coverage requires adding examples for these response codes across most of the 18 paths - a large, separate effort from the fixes above, and not attempted in this pass.
+**37% coverage** (7/18 paths, 7/36 operations, 7/159 responses), with 93 scenarios skipped - almost all `T00002: Examples Required` for non-200 codes (304/404/500) that have no example wired up.
 
-**This was tested experimentally, and confirms the test-isolation issue extends beyond DELETE.** As an attempt to close some of the coverage gap, 404 Not Found examples were added for all six getXById operations (owner, pet, pet type, visit, specialty, vet), each targeting an ID one past the real seed-data range (so it would be schema-valid but genuinely absent from the database). Getting to a schema-valid, DB-absent ID required first correcting the maximum bounds on all six ID parameters, which had drifted out of sync with the actual seed-data row counts (e.g. ownerId capped at 8 while 10 owners exist, petId capped at 7 while 13 pets exist, and similarly for pet types, visits, and vets). All six 404 examples passed Specmatic's own examples validate command (schema-shape correct). However, when run against the live application, **all six failed identically** with Specification expected status 404 but response contained status 200 - because by the time each scenario ran, an earlier POST scenario in the same test run had already created a row at that exact ID (since, as documented above, DELETEs that would clean these up keep failing on unrelated grounds). This makes the pattern very hard to avoid: any ID chosen for a 404 example can be filled in by an unrelated, earlier-running scenario. All of these changes (schema bounds, six 404 example files) were reverted; the repository remains at the clean 221/214/7 baseline. Closing this coverage gap - and by extension the 93 skipped scenarios - is blocked on the same root cause as the DELETE failures: **there is no way to reliably reason about 'this ID is absent' without resetting the database between scenarios**, since the standalone-HTTP ContractTest architecture has no hook for that today.
-
-
+Attempted to close this by adding 404 examples for all six `getXById` operations (after correcting several stale `maximum` bounds that didn't match actual seed-data counts). All six examples validated correctly but **failed at runtime** - by the time each ran, an earlier POST scenario had already created a row at that exact 'absent' ID. Same root cause as above: no reliable way to guarantee an ID is absent without a DB reset between scenarios. Changes reverted; repo remains at the clean 221/214/7 baseline.
 
 ### Other Notes
 
-- External examples: `src/main/resources/openapi_examples/` (six `delete_*.json` files exist for the DELETE operations but are not currently tied to their scenarios - Specmatic requires a named `examples:` block in the parameter *and* response sections of the OpenAPI spec to correlate an external example with a specific response code; a bare `{"status": 200}` example with no inline named-example wiring is not picked up for these single-path-param, no-body operations. This is a separate, smaller follow-up from the test-isolation issue above.)
+- External examples: `src/main/resources/openapi_examples/`
 - HTML report: `build/reports/specmatic/test/html/index.html`
 - CI: runs via `.github/workflows/specmatic.yml`
 
