@@ -1,0 +1,30 @@
+Owner:
+  firstName:
+    - James
+    - Mary
+    - Robert
+    - Patricia
+  lastName:
+    - Smith
+    - Johnson
+    - Williams
+    - Brown
+  city:
+    - Madison
+    - Sun Prairie
+    - Monona
+    - McFarland
+  telephone:
+    - "6085551234"
+    - "6085555678"
+    - "6085559012"
+
+Vet:
+  firstName:
+    - James
+    - Helen
+    - Linda
+  lastName:
+    - Carter
+    - Leary
+    - Douglas
