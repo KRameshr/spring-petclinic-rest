@@ -359,20 +359,25 @@ This project uses [Specmatic](https://specmatic.io) v2.50.0 with JUnit 5 to cont
 ### Results
 
 **221 scenarios, 214 passing, 7 failing (~97%)**, measured on a clean DB immediately after startup.
+**221 scenarios, 215 passing, 6 failing (~97%)**, measured on a clean DB immediately after startup.
 
 Issues found and fixed:
 - Overly-tight `maximum` constraints on response `id` fields
-- Status code mismatches (some PUT endpoints return 204/201 but were documented as 200)
+- Status code mismatches (e.g. `POST /visits` returned 201 but was documented as 200)
 - Missing `required` fields on `User` (password/roles/enabled)
 - Missing `petId` in the `POST /visits` request schema, causing every generated request to fail (fixed via a new request-only `VisitCreate` schema + mapper + controller change)
+- A dictionary key mismatch (`Owner`/`Vet` vs the actual schema names `OwnerFields`/`VetFields`) meant generated test data used random strings instead of the intended realistic values; fixing the key names resolved this and, in the process, surfaced and fixed the `POST /visits` status code issue above.
+- Declared an `ETag` response header in the spec for several GET operations, but the app never implemented it. Added Spring's built-in `ShallowEtagHeaderFilter` (one new config class, no controller changes) to genuinely support conditional GET/304 responses.
 
-### Remaining 7 failures: root cause
+### Remaining 6 failures: root cause
 
-The 6 positive DELETE scenarios and `POST /visits` all fail for the same reason: Specmatic generates a random ID for these operations (the 6 DELETEs have no `minimum`/`maximum` on their ID parameter, unlike sibling GET/PUT operations; `POST /visits` generates a random `petId`), and that ID almost never matches a real seeded row, so the app correctly returns 404 instead of the expected 200.
+The 6 positive DELETE scenarios (owner, pet type, pet, visit, specialty, vet) all fail for the same reason: their ID parameters have no `minimum`/`maximum` bounds in the spec (unlike sibling GET/PUT operations), so Specmatic generates a random ID that almost never matches a real seeded row, and the app correctly returns 404 instead of the expected 200.
 
-**This isn't a simple schema fix.** Adding proper ID bounds does make Specmatic pick a valid ID - but `ContractTest` runs against a live, already-running app over plain HTTP with no per-scenario DB reset. Once a DELETE actually succeeds, it permanently removes real seed data, which cascades into 20+ unrelated failures later in the same run. This was confirmed in two separate experiments (schema bounds alone, and schema bounds + a named example tying a specific ID to the scenario) - both reproduced the same cascade. A related, independent bug also surfaced: `deleteOwner` returns `200` with an empty body, but the spec declares a full `Owner` response schema.
+**This isn't a simple schema fix.** Adding proper ID bounds does make Specmatic pick a valid ID - but `ContractTest` runs against a live, already-running app over plain HTTP with no per-scenario DB reset. Once a DELETE actually succeeds, it permanently removes real seed data, which cascades into 20+ unrelated failures later in the same run. This was confirmed across five separate attempts (schema bounds alone; schema bounds plus a named example; dedicated throwaway seed rows; 404 examples for the coverage gap; and a dictionary override for the ID) - every attempt reproduced the same cascade. A related, independent bug also surfaced: `deleteOwner` returns `200` with an empty body, but the spec declares a full `Owner` response schema.
 
-Fixing this properly requires **test isolation** (resetting the DB between scenarios), which is a test-infrastructure change outside this pass's scope. Tracked as follow-up work.
+We also investigated the other main source of skipped coverage - the 304 (Not Modified) and 500 (Server Error) responses required for most operations. We fixed the underlying `ETag`/304 support itself (see above), but writing a working 304 example hit the same DB-reset limitation, since the ETag value changes whenever seed data is mutated elsewhere in the run. For 500, the app's existing validation (see `ExceptionControllerAdvice`) correctly converts malformed input into 4xx responses, so a genuine, reproducible 500 could not be triggered without deliberately breaking the app.
+
+Fixing the DELETE/coverage gap properly requires **test isolation** (resetting the DB between scenarios), which is a test-infrastructure change outside this pass's scope. Tracked as follow-up work.
 
 ### Examples Validation
 

@@ -1,4 +1,4 @@
-Owner:
+OwnerFields:
   firstName:
     - James
     - Mary
@@ -9,6 +9,10 @@ Owner:
     - Johnson
     - Williams
     - Brown
+  address:
+    - 123 Main St.
+    - 456 Oak Ave.
+    - 789 Elm Dr.
   city:
     - Madison
     - Sun Prairie
@@ -19,7 +23,7 @@ Owner:
     - "6085555678"
     - "6085559012"
 
-Vet:
+VetFields:
   firstName:
     - James
     - Helen
@@ -28,3 +32,9 @@ Vet:
     - Carter
     - Leary
     - Douglas
+
+VisitCreate:
+  petId:
+    - 1
+    - 2
+    - 3

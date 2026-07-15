@@ -1107,7 +1107,7 @@ paths:
               $ref: "#/components/schemas/VisitCreate"
         required: true
       responses:
-        200:
+        201:
           description: visit created successfully.
           headers:
             ETag:
