@@ -65,7 +65,7 @@ public class VetRestControllerV1 implements VetsApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<List<VetDto>> listVets() {
+    public ResponseEntity<List<VetDto>> listVets(String ifNoneMatch) {
         List<VetDto> vets =
             new ArrayList<>(
                 vetMapper.toVetDtos(
@@ -82,7 +82,7 @@ public class VetRestControllerV1 implements VetsApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<VetDto> getVet(Integer vetId) {
+    public ResponseEntity<VetDto> getVet(Integer vetId, String ifNoneMatch) {
         Vet vet = this.clinicService.findVetById(vetId);
 
         if (vet == null) {
@@ -205,7 +205,7 @@ public class VetRestControllerV1 implements VetsApi {
 
         return new ResponseEntity<>(
             vetMapper.toVetDto(vet),
-            HttpStatus.NO_CONTENT
+            HttpStatus.OK
         );
     }
 }

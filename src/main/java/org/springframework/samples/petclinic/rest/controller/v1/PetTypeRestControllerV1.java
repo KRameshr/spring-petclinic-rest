@@ -50,7 +50,7 @@ public class PetTypeRestControllerV1 implements PettypesApi {
 
     @PreAuthorize("hasAnyRole(@roles.OWNER_ADMIN, @roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<List<PetTypeDto>> listPetTypes() {
+    public ResponseEntity<List<PetTypeDto>> listPetTypes(String ifNoneMatch) {
         List<PetType> petTypes = new ArrayList<>(this.clinicService.findAllPetTypes());
         if (petTypes.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -60,7 +60,7 @@ public class PetTypeRestControllerV1 implements PettypesApi {
 
     @PreAuthorize("hasAnyRole(@roles.OWNER_ADMIN, @roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<PetTypeDto> getPetType(Integer petTypeId) {
+    public ResponseEntity<PetTypeDto> getPetType(Integer petTypeId, String ifNoneMatch) {
         PetType petType = this.clinicService.findPetTypeById(petTypeId);
         if (petType == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

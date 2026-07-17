@@ -52,7 +52,7 @@ public VisitRestControllerV1(ClinicService clinicService, VisitMapper visitMappe
 
 @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
 @Override
-public ResponseEntity<List<VisitDto>> listVisits() {
+public ResponseEntity<List<VisitDto>> listVisits(String ifNoneMatch) {
     List<Visit> visits = new ArrayList<>(this.clinicService.findAllVisits());
 
     if (visits.isEmpty()) {
@@ -67,7 +67,7 @@ public ResponseEntity<List<VisitDto>> listVisits() {
 
 @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
 @Override
-public ResponseEntity<VisitDto> getVisit(Integer visitId) {
+public ResponseEntity<VisitDto> getVisit(Integer visitId, String ifNoneMatch) {
     Visit visit = this.clinicService.findVisitById(visitId);
 
     if (visit == null) {
@@ -134,10 +134,12 @@ public ResponseEntity<VisitDto> deleteVisit(Integer visitId) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    VisitDto deletedVisitDto = visitMapper.toVisitDto(visit);
     this.clinicService.deleteVisit(visit);
 
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    return new ResponseEntity<>(deletedVisitDto, HttpStatus.OK);
 }
 
 
 }
+

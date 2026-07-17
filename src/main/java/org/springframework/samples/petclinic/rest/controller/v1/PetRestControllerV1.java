@@ -52,7 +52,7 @@ public class PetRestControllerV1 implements PetsApi {
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override
-    public ResponseEntity<PetDto> getPet(Integer petId) {
+    public ResponseEntity<PetDto> getPet(Integer petId, String ifNoneMatch) {
         PetDto pet = petMapper.toPetDto(this.clinicService.findPetById(petId));
         if (pet == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,7 +62,7 @@ public class PetRestControllerV1 implements PetsApi {
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override
-    public ResponseEntity<List<PetDto>> listPets() {
+    public ResponseEntity<List<PetDto>> listPets(String ifNoneMatch) {
         List<PetDto> pets = new ArrayList<>(petMapper.toPetsDto(this.clinicService.findAllPets()));
         if (pets.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -76,6 +76,10 @@ public class PetRestControllerV1 implements PetsApi {
     public ResponseEntity<PetDto> updatePet(Integer petId, PetFieldsDto petFieldsDto) {
         Pet currentPet = this.clinicService.findPetById(petId);
         if (currentPet == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (petFieldsDto.getType() == null
+                || this.clinicService.findPetTypeById(petFieldsDto.getType().getId()) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         currentPet.setBirthDate(petFieldsDto.getBirthDate());

@@ -58,7 +58,7 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<List<SpecialtyDto>> listSpecialties() {
+    public ResponseEntity<List<SpecialtyDto>> listSpecialties(String ifNoneMatch) {
         List<SpecialtyDto> specialties = new ArrayList<>();
         specialties.addAll(
             specialtyMapper.toSpecialtyDtos(
@@ -75,7 +75,7 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<SpecialtyDto> getSpecialty(Integer specialtyId) {
+    public ResponseEntity<SpecialtyDto> getSpecialty(Integer specialtyId, String ifNoneMatch) {
         Specialty specialty =
             this.clinicService.findSpecialtyById(specialtyId);
 
@@ -156,8 +156,9 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+        SpecialtyDto deletedSpecialtyDto = specialtyMapper.toSpecialtyDto(specialty);
         this.clinicService.deleteSpecialty(specialty);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(deletedSpecialtyDto, HttpStatus.OK);
     }
 }
