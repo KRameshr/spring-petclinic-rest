@@ -26,3 +26,4 @@ springboot-petclinic-server/
 ./src/test/postman/reports/
 
 *.log
+/build/
