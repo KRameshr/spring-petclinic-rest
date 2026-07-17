@@ -1,0 +1,1 @@
+{"http-request":{"method":"POST","path":"/owners/14/pets","body":{"name":"Ghost","birthDate":"2015-01-01","type":{"id":1,"name":"cat"}}},"http-response":{"status":404,"body":{"type":"http://localhost:9966/petclinic/api/owners/13/pets","title":"NotFoundException","status":404,"detail":"Owner not found.","timestamp":"2026-01-01T00:00:00Z","schemaValidationErrors":[]}}}

@@ -1,0 +1,1 @@
+{"http-request":{"method":"GET","path":"/owners/1/pets/16"},"http-response":{"status":404,"body":{"type":"http://localhost:9966/petclinic/api/owners/1/pets/16","title":"NotFoundException","status":404,"detail":"Pet not found.","timestamp":"2026-01-01T00:00:00Z","schemaValidationErrors":[]}}}

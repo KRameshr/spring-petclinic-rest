@@ -1,0 +1,1 @@
+{"http-request":{"method":"POST","path":"/visits","body":{"date":"2026-01-01","description":"ghost visit","petId":16}},"http-response":{"status":404,"body":{"type":"http://localhost:9966/petclinic/api/visits","title":"NotFoundException","status":404,"detail":"Pet not found.","timestamp":"2026-01-01T00:00:00Z","schemaValidationErrors":[]}}}
