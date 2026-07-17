@@ -75,6 +75,12 @@ paths:
           schema:
             type: string
             example: Davis
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Owner details found and returned.
@@ -139,6 +145,12 @@ paths:
             maximum: 100
             default: 20
             example: 5
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Owner page found and returned.
@@ -186,8 +198,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 8
+            maximum: 18
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Owner details found and returned.
@@ -240,7 +258,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 8
+            maximum: 18
             example: 1
       requestBody:
         description: The pet owner details to use for the update.
@@ -289,7 +307,7 @@ paths:
           schema:
             type: integer
             format: int32
-            example: 10
+            example: 1
       responses:
         200:
           description: Owner details found and returned.
@@ -343,7 +361,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 8
+            maximum: 18
             example: 1
       requestBody:
         description: The details of the new pet.
@@ -393,7 +411,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 8
+            maximum: 18
             example: 1
         - name: petId
           in: path
@@ -403,8 +421,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 7
+            maximum: 20
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Pet details found and returned.
@@ -458,7 +482,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 8
+            maximum: 18
             example: 1
         - name: petId
           in: path
@@ -468,7 +492,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 7
+            maximum: 20
             example: 1
       requestBody:
         description: The pet details to use for the update.
@@ -514,7 +538,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 8
+            maximum: 18
             example: 1
         - name: petId
           in: path
@@ -524,7 +548,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 7
+            maximum: 20
             example: 1
       requestBody:
         description: The details of the new vet visit.
@@ -565,6 +589,13 @@ paths:
       operationId: listPetTypes
       summary: Lists pet types
       description: Returns an array of pet types.
+      parameters:
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Pet types found and returned.
@@ -658,8 +689,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 4
+            maximum: 20
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Pet type details found and returned.
@@ -712,7 +749,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 4
+            maximum: 20
             example: 1
       requestBody:
         description: The pet type
@@ -763,6 +800,8 @@ paths:
           schema:
             type: integer
             format: int32
+            minimum: 1
+            maximum: 20
             example: 6
       responses:
         200:
@@ -809,6 +848,13 @@ paths:
       operationId: listPets
       summary: Lists pet
       description: Returns an array of pet .
+      parameters:
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Pet types found and returned.
@@ -907,8 +953,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 7
+            maximum: 20
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Pet details found and returned.
@@ -961,7 +1013,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 7
+            maximum: 20
             example: 1
       requestBody:
         description: The pet
@@ -1066,6 +1118,13 @@ paths:
       operationId: listVisits
       summary: Lists visits
       description: Returns an array of visit .
+      parameters:
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: visits found and returned.
@@ -1159,8 +1218,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 2
+            maximum: 11
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Visit details found and returned.
@@ -1213,7 +1278,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 2
+            maximum: 11
             example: 1
       requestBody:
         description: The visit
@@ -1309,6 +1374,13 @@ paths:
       operationId: listSpecialties
       summary: Lists specialties
       description: Returns an array of specialty .
+      parameters:
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Specialties found and returned.
@@ -1402,8 +1474,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 3
+            maximum: 10
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Specialty details found and returned.
@@ -1456,7 +1534,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 3
+            maximum: 10
             example: 1
       requestBody:
         description: The pet
@@ -1552,6 +1630,13 @@ paths:
       operationId: listVets
       summary: Lists vets
       description: Returns an array of vets.
+      parameters:
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Vets found and returned.
@@ -1645,8 +1730,14 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 4
+            maximum: 13
             example: 1
+        - name: If-None-Match
+          in: header
+          description: ETag value from a previous response, for conditional GET.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: Vet details found and returned.
@@ -1699,7 +1790,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 4
+            maximum: 13
             example: 1
       requestBody:
         description: The vet
@@ -2245,7 +2336,6 @@ components:
     VisitFields:
       title: Visit fields
       description: Editable fields of a vet visit.
-      type: object
       properties:
         date:
           title: Date
@@ -2334,7 +2424,7 @@ components:
               type: integer
               format: int32
               minimum: 1
-              maximum: 7
+              maximum: 20
               example: 1
           required:
             - id

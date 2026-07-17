@@ -5,6 +5,7 @@ specmatic:
     test:
       schemaResiliencyTests: all
       maxTestRequestCombinations: 1
+      parallelism: 1
 
 systemUnderTest:
   service:
@@ -34,3 +35,4 @@ components:
       openapi:
         type: test
         baseUrl: http://localhost:9966/petclinic/api
+        actuatorUrl: http://localhost:9966/petclinic/actuator
