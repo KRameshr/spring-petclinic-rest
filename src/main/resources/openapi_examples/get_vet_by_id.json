@@ -2,4 +2,3 @@
   "http-request": { "method": "GET", "path": "/vets/1" },
   "http-response": { "status": 200 }
 }
-

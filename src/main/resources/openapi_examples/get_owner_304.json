@@ -1,1 +1,8 @@
-{"http-request":{"method":"GET","path":"/owners/2","headers":{"If-None-Match":"\"072535212d312e3a13ac5cda16a09f55d\""}},"http-response":{"status":304}}
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/owners/2",
+    "headers": { "If-None-Match": "\"072535212d312e3a13ac5cda16a09f55d\"" }
+  },
+  "http-response": { "status": 304 }
+}

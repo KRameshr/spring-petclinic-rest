@@ -1,20 +1,17 @@
 {
-    "http-request":  {
-                         "method":  "PUT",
-                         "path": "/vets/1",
-                         "body":  {
-                                      "firstName":  "James",
-                                      "lastName":  "Carter",
-                                      "specialties":  [
-
-                                                      ]
-                                  },
-                         "headers":  {
-                                         "Content-Type":  "application/json"
-                                     }
-                     },
-    "http-response":  {
-                          "status":  200
-                      }
+  "http-request": {
+    "method": "PUT",
+    "path": "/vets/1",
+    "body": {
+      "firstName": "James",
+      "lastName": "Carter",
+      "specialties": []
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "http-response": {
+    "status": 200
+  }
 }
-

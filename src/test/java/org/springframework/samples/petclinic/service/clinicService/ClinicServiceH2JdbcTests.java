@@ -34,4 +34,19 @@ import org.springframework.test.context.TestPropertySource;
 })
 class ClinicServiceH2JdbcTests extends AbstractClinicServiceTests {
 
+
+    // This H2-backed profile loads the app's full data.sql, which has more
+    // owners than the shared hsqldb-based fixture used by the other two
+    // ClinicService test variants, so the paging expectations differ here.
+    @org.junit.jupiter.api.Test
+    @Override
+    void shouldFindOwnersPage() {
+        org.springframework.data.domain.Page<org.springframework.samples.petclinic.model.Owner> owners =
+            this.clinicService.findOwners(null, org.springframework.data.domain.PageRequest.of(0, 3, org.springframework.data.domain.Sort.by("id")));
+        org.assertj.core.api.Assertions.assertThat(owners.getTotalElements()).isEqualTo(18);
+        org.assertj.core.api.Assertions.assertThat(owners.getTotalPages()).isEqualTo(6);
+        org.assertj.core.api.Assertions.assertThat(owners.getContent())
+            .extracting(org.springframework.samples.petclinic.model.Owner::getFirstName)
+            .containsExactly("George", "Betty", "Eduardo");
+    }
 }

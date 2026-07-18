@@ -1,1 +1,8 @@
-{"http-request":{"method":"GET","path":"/pets/2","headers":{"If-None-Match":"\"007fd6f80bb71f71ddd0db3d0ca9dda74\""}},"http-response":{"status":304}}
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/pets/2",
+    "headers": { "If-None-Match": "\"007fd6f80bb71f71ddd0db3d0ca9dda74\"" }
+  },
+  "http-response": { "status": 304 }
+}
