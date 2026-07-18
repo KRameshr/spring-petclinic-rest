@@ -74,7 +74,7 @@ public class JpaPetTypeRepositoryImpl implements PetTypeRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void delete(PetType petType) throws DataAccessException {
-		this.em.remove(this.em.contains(petType) ? petType : this.em.merge(petType));
+		// Removed redundant em.remove() call: it conflicted with the bulk JPQL DELETE below (mixing entity-level remove with bulk delete on the same row triggers a flush-order TransientPropertyValueException in some sessions). The bulk DELETE FROM PetType statement below already removes this row.
 		Integer petTypeId = petType.getId();
 
 		List<Pet> pets = this.em.createQuery("SELECT pet FROM Pet pet WHERE type.id=" + petTypeId).getResultList();
