@@ -1,7 +1,7 @@
 {
     "http-request":  {
                          "method":  "PUT",
-                         "path": "/owners/1",
+                         "path": "/owners/17",
                          "body":  {
                                       "firstName":  "George",
                                       "lastName":  "Franklin",
@@ -17,4 +17,3 @@
                           "status":  200
                       }
 }
-

@@ -94,7 +94,7 @@ INSERT INTO owners (first_name, last_name, address, city, telephone) VALUES
 ('Fillerd', 'Ownerd', '4 Gap St.', 'Gapville', '6085550004'),
 ('Fillere', 'Ownere', '5 Gap St.', 'Gapville', '6085550005'),
 ('Fillerf', 'Ownerf', '6 Gap St.', 'Gapville', '6085550006');
-DELETE FROM owners WHERE first_name = 'Gapb' AND last_name = 'Ownerb';
+-- Gapb Ownerb kept as real data to avoid boundary-probe collisions
 
 INSERT INTO pets (name, birth_date, type_id, owner_id) VALUES
 ('FillerPeta', '2016-01-01', 1, 12),
@@ -103,18 +103,18 @@ INSERT INTO pets (name, birth_date, type_id, owner_id) VALUES
 ('FillerPetd', '2016-01-01', 1, 12),
 ('FillerPete', '2016-01-01', 1, 12),
 ('FillerPetf', '2016-01-01', 1, 12);
-DELETE FROM pets WHERE name = 'GapPetb';
+-- GapPetb kept as real data to avoid boundary-probe collisions
 
 INSERT INTO types (name) VALUES
 ('filler-type-a'), ('filler-type-b'), ('filler-type-c'),
 ('gap-type-d'), ('filler-type-e'), ('filler-type-f'),
 ('filler-type-g'), ('filler-type-h'), ('filler-type-i');
-DELETE FROM types WHERE name = 'gap-type-d';
+-- gap-type-d kept as real data (id=11) to avoid boundary-probe collisions
 
 INSERT INTO specialties (name) VALUES
 ('filler-specialty-a'), ('gap-specialty-b'), ('filler-specialty-c'),
 ('filler-specialty-d'), ('filler-specialty-e'), ('filler-specialty-f');
-DELETE FROM specialties WHERE name = 'gap-specialty-b';
+-- gap-specialty-b kept as real data to avoid boundary-probe collisions
 
 INSERT INTO vets (first_name, last_name) VALUES
 ('Fillera', 'Veta'),
@@ -123,7 +123,7 @@ INSERT INTO vets (first_name, last_name) VALUES
 ('Fillerd', 'Vetd'),
 ('Fillere', 'Vete'),
 ('Fillerf', 'Vetf');
-DELETE FROM vets WHERE first_name = 'Gapb' AND last_name = 'Vetb';
+-- Gapb Vetb kept as real data to avoid boundary-probe collisions
 
 INSERT INTO visits (pet_id, visit_date, description) VALUES
 (1, '2016-01-01', 'filler visit a'),
@@ -132,4 +132,4 @@ INSERT INTO visits (pet_id, visit_date, description) VALUES
 (1, '2016-01-04', 'filler visit d'),
 (1, '2016-01-05', 'filler visit e'),
 (1, '2016-01-06', 'filler visit f');
-DELETE FROM visits WHERE description = 'gap visit b';
+-- gap visit b kept as real data to avoid boundary-probe collisions

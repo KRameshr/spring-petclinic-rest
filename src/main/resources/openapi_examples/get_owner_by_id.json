@@ -1,7 +1,7 @@
 {
   "http-request": {
     "method": "GET",
-    "path": "/owners/1"
+    "path": "/owners/17"
   },
   "http-response": {
     "status": 200

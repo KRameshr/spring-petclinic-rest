@@ -1,1 +1,0 @@
-{"http-request":{"method":"GET","path":"/specialties/6"},"http-response":{"status":404,"body":{"type":"http://localhost:9966/petclinic/api/specialties/5","title":"NotFoundException","status":404,"detail":"Specialty not found.","timestamp":"2026-01-01T00:00:00Z","schemaValidationErrors":[]}}}

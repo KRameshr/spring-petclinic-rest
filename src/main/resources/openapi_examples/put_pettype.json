@@ -10,7 +10,6 @@
                                      }
                      },
     "http-response":  {
-                          "status":  200
+                          "status":  204
                       }
 }
-

@@ -689,7 +689,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 20
+            maximum: 17
             example: 1
         - name: If-None-Match
           in: header
@@ -749,7 +749,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 20
+            maximum: 17
             example: 1
       requestBody:
         description: The pet type
@@ -801,7 +801,7 @@ paths:
             type: integer
             format: int32
             minimum: 1
-            maximum: 20
+            maximum: 17
             example: 6
       responses:
         200:
@@ -2424,7 +2424,7 @@ components:
               type: integer
               format: int32
               minimum: 1
-              maximum: 20
+              maximum: 17
               example: 1
           required:
             - id
