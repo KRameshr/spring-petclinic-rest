@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN_PRESENT: ${{ secrets.SONAR_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -29,7 +31,7 @@ jobs:
       - name: Build, test, and check coverage
         run: ./mvnw -B verify
       - name: SonarCloud analysis (optional, skipped if no token configured)
-        if: ${{ secrets.SONAR_TOKEN != '' }}
+        if: ${{ env.SONAR_TOKEN_PRESENT == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
