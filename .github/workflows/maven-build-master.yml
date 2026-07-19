@@ -26,11 +26,14 @@ jobs:
             echo "Waiting for app to start... ($i)"
             sleep 5
           done
-      - name: Build and analyze
+      - name: Build, test, and check coverage
+        run: ./mvnw -B verify
+      - name: SonarCloud analysis (optional, skipped if no token configured)
+        if: ${{ secrets.SONAR_TOKEN != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-petclinic_spring-petclinic-rest -Dsonar.organization=spring-petclinic
+        run: ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-petclinic_spring-petclinic-rest -Dsonar.organization=spring-petclinic
       - name: Upload app log
         if: always()
         uses: actions/upload-artifact@v4
