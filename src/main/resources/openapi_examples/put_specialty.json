@@ -2,14 +2,8 @@
   "http-request": {
     "method": "PUT",
     "path": "/specialties/1",
-    "body": {
-      "name": "radiology"
-    },
-    "headers": {
-      "Content-Type": "application/json"
-    }
+    "body": { "id": 1, "name": "radiology" },
+    "headers": { "Content-Type": "application/json" }
   },
-  "http-response": {
-    "status": 200
-  }
+  "http-response": { "status": 204 }
 }

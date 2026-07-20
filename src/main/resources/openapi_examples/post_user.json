@@ -6,17 +6,17 @@
       "username": "john.doe",
       "password": "1234abc",
       "enabled": true,
-      "roles": [
-        {
-          "name": "admin"
-        }
-      ]
+      "roles": [ { "name": "admin" } ]
     },
-    "headers": {
-      "Content-Type": "application/json"
-    }
+    "headers": { "Content-Type": "application/json" }
   },
   "http-response": {
-    "status": 201
+    "status": 201,
+    "body": {
+      "username": "john.doe",
+      "password": "1234abc",
+      "enabled": true,
+      "roles": [ { "name": "admin" } ]
+    }
   }
 }

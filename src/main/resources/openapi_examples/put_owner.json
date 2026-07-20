@@ -9,11 +9,18 @@
       "city": "Madison",
       "telephone": "6085551023"
     },
-    "headers": {
-      "Content-Type": "application/json"
-    }
+    "headers": { "Content-Type": "application/json" }
   },
   "http-response": {
-    "status": 200
+    "status": 200,
+    "body": {
+      "id": 17,
+      "firstName": "George",
+      "lastName": "Franklin",
+      "address": "110 W. Liberty St.",
+      "city": "Madison",
+      "telephone": "6085551023",
+      "pets": []
+    }
   }
 }

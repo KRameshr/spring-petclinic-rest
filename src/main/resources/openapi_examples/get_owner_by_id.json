@@ -4,6 +4,15 @@
     "path": "/owners/17"
   },
   "http-response": {
-    "status": 200
+    "status": 200,
+    "body": {
+      "id": 17,
+      "firstName": "Fillere",
+      "lastName": "Ownere",
+      "address": "5 Gap St.",
+      "city": "Gapville",
+      "telephone": "6085550005",
+      "pets": []
+    }
   }
 }

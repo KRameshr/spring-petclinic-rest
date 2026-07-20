@@ -395,6 +395,7 @@ This was confirmed empirically: removing the ETag-dependent 304 examples from th
 
 ### Test suite status
 
+- specmatic examples validate: all 35 example files valid (fixed 15 that were missing required response bodies, using stale status codes from before the DELETE/204 fixes, or including fields not present in the current schema).
 - Specmatic ContractTest: 254 tests, 100 percent pass with specmatic-basic.yaml; the full resiliency run occasionally has 1 non-deterministic failure as described above.
 - Full mvn verify: 491 out of 491 tests pass, covering all REST controller unit tests, all 4 ClinicService variants (H2/JDBC, HSQL/JDBC, JPA, Spring Data JPA), plus SpringConfigTests, ValidatorTests, and PetAgeValidatorTest. JaCoCo coverage checks pass with thresholds set to 80/60 percent line/branch to match actual measured coverage.
 
