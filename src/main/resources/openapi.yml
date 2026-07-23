@@ -5,7 +5,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  version: "1.0"
+  version: '1.0'
 servers:
   - url: http://localhost:9966/petclinic/api
 tags:
@@ -40,7 +40,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OwnerFields"
+              $ref: '#/components/schemas/OwnerFields'
         required: true
       responses:
         201:
@@ -48,19 +48,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Owner"
+                $ref: '#/components/schemas/Owner'
         400:
           description: Bad request.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     get:
       tags:
         - owners
@@ -94,7 +94,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Owner"
+                  $ref: '#/components/schemas/Owner'
         304:
           description: Not modified.
           headers:
@@ -107,7 +107,7 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /v2/owners:
     get:
       tags:
@@ -162,7 +162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OwnerPage"
+                $ref: '#/components/schemas/OwnerPage'
         304:
           description: Not modified.
           headers:
@@ -175,13 +175,13 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /owners/{ownerId}:
     get:
       tags:
@@ -217,7 +217,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Owner"
+                $ref: '#/components/schemas/Owner'
         304:
           description: Not modified.
           headers:
@@ -230,19 +230,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Owner not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - owners
@@ -265,7 +265,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OwnerFields"
+              $ref: '#/components/schemas/OwnerFields'
         required: true
       responses:
         200:
@@ -273,25 +273,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Owner"
+                $ref: '#/components/schemas/Owner'
         400:
           description: Bad request.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Owner not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
 
     delete:
       tags:
@@ -319,7 +319,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Owner"
+                $ref: '#/components/schemas/Owner'
         304:
           description: Not modified.
           headers:
@@ -332,19 +332,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Owner  not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /owners/{ownerId}/pets:
     post:
       tags:
@@ -368,7 +368,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetFields"
+              $ref: '#/components/schemas/PetFields'
         required: true
       responses:
         201:
@@ -376,25 +376,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: '#/components/schemas/Pet'
         400:
           description: Bad request.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet or Owner not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /owners/{ownerId}/pets/{petId}:
     get:
       tags:
@@ -440,7 +440,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: '#/components/schemas/Pet'
         304:
           description: Not modified.
           headers:
@@ -453,19 +453,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Owner or pet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - owners
@@ -499,7 +499,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetFields"
+              $ref: '#/components/schemas/PetFields'
         required: true
       responses:
         204:
@@ -509,19 +509,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet not found for this owner.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /owners/{ownerId}/pets/{petId}/visits:
     post:
       tags:
@@ -555,7 +555,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VisitFields"
+              $ref: '#/components/schemas/VisitFields'
         required: true
       responses:
         201:
@@ -563,25 +563,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Visit"
+                $ref: '#/components/schemas/Visit'
         400:
           description: Bad request.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet not found for this owner.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /pettypes:
     get:
       tags:
@@ -609,7 +609,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PetType"
+                  $ref: '#/components/schemas/PetType'
         304:
           description: Not modified.
           headers:
@@ -622,7 +622,7 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     post:
       tags:
         - pettypes
@@ -634,7 +634,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetTypeFields"
+              $ref: '#/components/schemas/PetTypeFields'
         required: true
       responses:
         201:
@@ -647,7 +647,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetType"
+                $ref: '#/components/schemas/PetType'
         304:
           description: Not modified.
           headers:
@@ -660,19 +660,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet Type not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /pettypes/{petTypeId}:
     get:
       tags:
@@ -708,7 +708,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetType"
+                $ref: '#/components/schemas/PetType'
         304:
           description: Not modified.
           headers:
@@ -721,19 +721,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet Type not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - pettypes
@@ -756,7 +756,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetType"
+              $ref: '#/components/schemas/PetType'
         required: true
       responses:
         204:
@@ -773,19 +773,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet Type not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     delete:
       tags:
         - pettypes
@@ -814,7 +814,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetType"
+                $ref: '#/components/schemas/PetType'
         304:
           description: Not modified.
           headers:
@@ -827,19 +827,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet type not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
 
   /pets:
     get:
@@ -868,7 +868,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Pet"
+                  $ref: '#/components/schemas/Pet'
         304:
           description: Not modified.
           headers:
@@ -881,7 +881,7 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /v2/pets:
     get:
       tags:
@@ -923,19 +923,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetPage"
+                $ref: '#/components/schemas/PetPage'
         400:
           description: Bad request.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
 
   /pets/{petId}:
     get:
@@ -972,7 +972,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: '#/components/schemas/Pet'
         304:
           description: Not modified.
           headers:
@@ -985,19 +985,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - pets
@@ -1020,7 +1020,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetFields"
+              $ref: '#/components/schemas/PetFields'
         required: true
       responses:
         200:
@@ -1033,7 +1033,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: '#/components/schemas/Pet'
         304:
           description: Not modified.
           headers:
@@ -1046,19 +1046,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     delete:
       tags:
         - pets
@@ -1085,7 +1085,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: '#/components/schemas/Pet'
         304:
           description: Not modified.
           headers:
@@ -1098,19 +1098,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Pet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /visits:
     get:
       tags:
@@ -1138,7 +1138,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Visit"
+                  $ref: '#/components/schemas/Visit'
         304:
           description: Not modified.
           headers:
@@ -1151,7 +1151,7 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     post:
       tags:
         - visits
@@ -1163,7 +1163,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VisitCreate"
+              $ref: '#/components/schemas/VisitCreate'
         required: true
       responses:
         201:
@@ -1176,7 +1176,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Visit"
+                $ref: '#/components/schemas/Visit'
         304:
           description: Not modified.
           headers:
@@ -1189,19 +1189,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Visit not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /visits/{visitId}:
     get:
       tags:
@@ -1237,7 +1237,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Visit"
+                $ref: '#/components/schemas/Visit'
         304:
           description: Not modified.
           headers:
@@ -1250,19 +1250,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Visit not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - visits
@@ -1285,7 +1285,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VisitFields"
+              $ref: '#/components/schemas/VisitFields'
         required: true
       responses:
         204:
@@ -1302,19 +1302,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Visit not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     delete:
       tags:
         - visits
@@ -1341,7 +1341,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Visit"
+                $ref: '#/components/schemas/Visit'
         304:
           description: Not modified.
           headers:
@@ -1354,19 +1354,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Visit not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /specialties:
     get:
       tags:
@@ -1394,7 +1394,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Specialty"
+                  $ref: '#/components/schemas/Specialty'
         304:
           description: Not modified.
           headers:
@@ -1407,7 +1407,7 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     post:
       tags:
         - specialties
@@ -1419,7 +1419,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SpecialtyFields"
+              $ref: '#/components/schemas/SpecialtyFields'
         required: true
       responses:
         201:
@@ -1432,7 +1432,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Specialty"
+                $ref: '#/components/schemas/Specialty'
         304:
           description: Not modified.
           headers:
@@ -1445,19 +1445,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Specialty not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /specialties/{specialtyId}:
     get:
       tags:
@@ -1493,7 +1493,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Specialty"
+                $ref: '#/components/schemas/Specialty'
         304:
           description: Not modified.
           headers:
@@ -1506,19 +1506,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Specialty not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - specialties
@@ -1541,7 +1541,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Specialty"
+              $ref: '#/components/schemas/Specialty'
         required: true
       responses:
         204:
@@ -1558,19 +1558,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Specialty not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     delete:
       tags:
         - specialties
@@ -1597,7 +1597,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Specialty"
+                $ref: '#/components/schemas/Specialty'
         304:
           description: Not modified.
           headers:
@@ -1610,19 +1610,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Specialty not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /vets:
     get:
       tags:
@@ -1650,7 +1650,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Vet"
+                  $ref: '#/components/schemas/Vet'
         304:
           description: Not modified.
           headers:
@@ -1663,7 +1663,7 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     post:
       tags:
         - vets
@@ -1675,7 +1675,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VetFields"
+              $ref: '#/components/schemas/VetFields'
         required: true
       responses:
         201:
@@ -1688,7 +1688,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vet"
+                $ref: '#/components/schemas/Vet'
         304:
           description: Not modified.
           headers:
@@ -1701,19 +1701,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Vet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
   /vets/{vetId}:
     get:
       tags:
@@ -1749,7 +1749,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vet"
+                $ref: '#/components/schemas/Vet'
         304:
           description: Not modified.
           headers:
@@ -1762,19 +1762,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Vet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     put:
       tags:
         - vets
@@ -1797,7 +1797,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Vet"
+              $ref: '#/components/schemas/Vet'
         required: true
       responses:
         204:
@@ -1819,19 +1819,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Vet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
     delete:
       tags:
         - vets
@@ -1858,7 +1858,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Vet"
+                $ref: '#/components/schemas/Vet'
         304:
           description: Not modified.
           headers:
@@ -1871,19 +1871,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: Vet not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
 
   /users:
     post:
@@ -1897,7 +1897,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: '#/components/schemas/User'
         required: true
       responses:
         201:
@@ -1910,7 +1910,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: '#/components/schemas/User'
         304:
           description: Not modified.
           headers:
@@ -1923,19 +1923,19 @@ paths:
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         404:
           description: User not found.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
         500:
           description: Server error.
           content:
             "application/problem+json":
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: '#/components/schemas/ProblemDetail'
 components:
   schemas:
     ProblemDetail:
@@ -1991,7 +1991,7 @@ components:
           description: Validation errors against the OpenAPI schema.
           type: array
           items:
-            $ref: "#/components/schemas/ValidationMessage"
+            $ref: '#/components/schemas/ValidationMessage'
       required:
         - type
         - title
@@ -2104,7 +2104,7 @@ components:
       title: Owner
       description: A pet owner.
       allOf:
-        - $ref: "#/components/schemas/OwnerFields"
+        - $ref: '#/components/schemas/OwnerFields'
         - type: object
           properties:
             id:
@@ -2121,7 +2121,7 @@ components:
               description: The pets owned by this individual including any booked vet visits.
               type: array
               items:
-                $ref: "#/components/schemas/Pet"
+                $ref: '#/components/schemas/Pet'
               readOnly: true
           required:
             - pets
@@ -2135,7 +2135,7 @@ components:
           description: Pet owners in the requested page.
           type: array
           items:
-            $ref: "#/components/schemas/Owner"
+            $ref: '#/components/schemas/Owner'
         page:
           title: Page
           description: Zero-based page index.
@@ -2183,7 +2183,7 @@ components:
           description: Pets in the requested page.
           type: array
           items:
-            $ref: "#/components/schemas/Pet"
+            $ref: '#/components/schemas/Pet'
         page:
           title: Page
           description: Zero-based page index.
@@ -2240,7 +2240,7 @@ components:
           example: "2010-09-07"
           x-field-extra-annotation: "@org.springframework.samples.petclinic.rest.validation.PetAgeValidation"
         type:
-          $ref: "#/components/schemas/PetType"
+          $ref: '#/components/schemas/PetType'
       required:
         - name
         - birthDate
@@ -2249,7 +2249,7 @@ components:
       title: Pet
       description: A pet.
       allOf:
-        - $ref: "#/components/schemas/PetFields"
+        - $ref: '#/components/schemas/PetFields'
         - type: object
           properties:
             id:
@@ -2275,7 +2275,7 @@ components:
               description: Vet visit bookings for this pet.
               type: array
               items:
-                $ref: "#/components/schemas/Visit"
+                $ref: '#/components/schemas/Visit'
               readOnly: true
           required:
             - id
@@ -2307,7 +2307,7 @@ components:
           description: The specialties of the vet.
           type: array
           items:
-            $ref: "#/components/schemas/Specialty"
+            $ref: '#/components/schemas/Specialty'
       required:
         - firstName
         - lastName
@@ -2316,7 +2316,7 @@ components:
       title: Vet
       description: A veterinarian.
       allOf:
-        - $ref: "#/components/schemas/VetFields"
+        - $ref: '#/components/schemas/VetFields'
         - type: object
           properties:
             id:
@@ -2357,7 +2357,7 @@ components:
       title: Visit create request
       description: Fields required to create a vet visit.
       allOf:
-        - $ref: "#/components/schemas/VisitFields"
+        - $ref: '#/components/schemas/VisitFields'
         - type: object
           properties:
             petId:
@@ -2374,7 +2374,7 @@ components:
       title: Visit
       description: A booking for a vet visit.
       allOf:
-        - $ref: "#/components/schemas/VisitFields"
+        - $ref: '#/components/schemas/VisitFields'
         - type: object
           properties:
             id:
@@ -2415,7 +2415,7 @@ components:
       title: Pet type
       description: A pet type.
       allOf:
-        - $ref: "#/components/schemas/PetTypeFields"
+        - $ref: '#/components/schemas/PetTypeFields'
         - type: object
           properties:
             id:
@@ -2457,7 +2457,7 @@ components:
           description: The roles of an user
           type: array
           items:
-            $ref: "#/components/schemas/Role"
+            $ref: '#/components/schemas/Role'
       required:
         - username
         - password
