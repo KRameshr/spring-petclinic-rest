@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 
 import java.util.*;
@@ -43,11 +42,6 @@ public class Vet extends Person {
         inverseJoinColumns = @JoinColumn(name = "specialty_id")
     )
     private Set<Specialty> specialties;
-
-    @Override
-    public Integer getId() {
-        return super.getId();
-    }
 
     @JsonIgnore
     protected Set<Specialty> getSpecialtiesInternal() {
@@ -93,5 +87,4 @@ public class Vet extends Person {
     public void clearSpecialties() {
         getSpecialtiesInternal().clear();
     }
-
 }

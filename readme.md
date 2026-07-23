@@ -364,6 +364,10 @@ Specmatic reports 60 percent operation coverage (up from 42 percent at the start
 - 304 on list endpoints, and on DELETE/PUT/POST: ETags here are content-hash based, so any earlier mutation invalidates a hardcoded 304 example before it runs. ShallowEtagHeaderFilter also only applies to GET in this Spring version, so DELETE/PUT/POST 304s are not reachable at all.
 - 4 POST-create 404s (pettypes/specialties/vets/users): these operations do not take a foreign-key reference in the request body, so there is no invalid-reference path to exercise.
 
+### Known limitation: /oops endpoint (tracked for a follow-up PR)
+
+The upstream OpenAPI spec includes an /oops endpoint whose 200 response is explicitly documented as "Never returned," alongside a 400 response that is genuinely returned. No real implementation can satisfy both a declared 200 and a description saying it never happens, so one Specmatic scenario for this endpoint (the positive 200 case) always fails, regardless of the implementation behind it. This is a pre-existing inconsistency in the spec itself, not something introduced by this change. Per guidance to avoid removing anything from the spec unless absolutely necessary, the endpoint and its 400 behavior have been kept and implemented (see OopsRestControllerV1.java); the one resulting, permanent test failure is left here as documented, known behavior, to be resolved at the spec level in a follow-up PR rather than by deleting the endpoint.
+
 ### Other Notes
 
 - External examples: src/main/resources/openapi_examples/
