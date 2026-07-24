@@ -1,1 +1,1 @@
-{"http-request":{"method":"GET","path":"/visits/1","headers":{"If-None-Match":"\"02e5a0e4d2e09273c25417d58fda15c1d\""}},"http-response":{"status":304}}
+{"http-request":{"method":"GET","path":"/visits/1","headers":{"If-None-Match":""}},"http-response":{"status":304}}
