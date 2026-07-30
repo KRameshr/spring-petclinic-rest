@@ -24,7 +24,6 @@ import org.springframework.samples.petclinic.mapper.SpecialtyMapper;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.rest.api.SpecialtiesApi;
 import org.springframework.samples.petclinic.rest.dto.SpecialtyDto;
-import org.springframework.samples.petclinic.rest.dto.SpecialtyFieldsDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -103,7 +102,7 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
     public ResponseEntity<SpecialtyDto> addSpecialty(
-            SpecialtyFieldsDto specialtyDto) {
+            SpecialtyDto specialtyDto) {
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -129,7 +128,7 @@ public class SpecialtyRestControllerV1 implements SpecialtiesApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<Void> updateSpecialty(
+    public ResponseEntity<SpecialtyDto> updateSpecialty(
             Integer specialtyId,
             SpecialtyDto specialtyDto) {
 

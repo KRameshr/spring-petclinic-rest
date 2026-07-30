@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -107,7 +108,7 @@ public class ExceptionControllerAdvice {
             ERROR_INVALID_REQUEST
         );
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
@@ -135,7 +136,7 @@ public class ExceptionControllerAdvice {
             ERROR_DATA_INTEGRITY
         );
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -161,7 +162,7 @@ public class ExceptionControllerAdvice {
             "The request contains an invalid parameter type"
         );
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -235,7 +236,7 @@ public class ExceptionControllerAdvice {
             );
         }
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -273,7 +274,7 @@ public class ExceptionControllerAdvice {
             e.getConstraintViolations()
         );
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -299,7 +300,7 @@ public class ExceptionControllerAdvice {
             ERROR_INVALID_REQUEST
         );
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
     @ExceptionHandler(Exception.class)
@@ -324,6 +325,6 @@ public class ExceptionControllerAdvice {
             ERROR_UNEXPECTED
         );
 
-        return ResponseEntity.status(status).body(detail);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 }
