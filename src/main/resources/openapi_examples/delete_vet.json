@@ -1,11 +1,11 @@
 {
-  "http-request": { "method": "DELETE", "path": "/vets/7" },
+  "http-request": { "method": "DELETE", "path": "/vets/6" },
   "http-response": {
     "status": 200,
     "body": {
-      "id": 7,
-      "firstName": "Alice",
-      "lastName": "Nguyen",
+      "id": 6,
+      "firstName": "Sharon",
+      "lastName": "Jenkins",
       "specialties": []
     }
   }
