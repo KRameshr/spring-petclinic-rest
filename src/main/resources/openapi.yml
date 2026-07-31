@@ -174,6 +174,7 @@ paths:
             minimum: 0
             default: 0
             example: 0
+            maximum: 21474836
         - name: size
           in: query
           description: Number of items per page.
@@ -669,7 +670,7 @@ paths:
               $ref: '#/components/schemas/PetTypeFields'
         required: true
       responses:
-        200:
+        201:
           description: Pet type created successfully.
           headers:
             ETag:
@@ -789,24 +790,8 @@ paths:
               $ref: '#/components/schemas/PetType'
         required: true
       responses:
-        200:
-          description: Pet type details found and returned.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PetType'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
+        204:
+          description: Update successful.
         400:
           description: Bad request.
           content:
@@ -938,6 +923,7 @@ paths:
             minimum: 0
             default: 0
             example: 0
+            maximum: 21474836
         - name: size
           in: query
           description: Number of items per page.
@@ -1055,7 +1041,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: '#/components/schemas/PetFields'
         required: true
       responses:
         200:
@@ -1199,10 +1185,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Visit'
+              $ref: '#/components/schemas/VisitCreate'
         required: true
       responses:
-        200:
+        201:
           description: visit created successfully.
           headers:
             ETag:
@@ -1322,24 +1308,8 @@ paths:
               $ref: '#/components/schemas/VisitFields'
         required: true
       responses:
-        200:
-          description: Visit details found and returned.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Visit'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
+        204:
+          description: Update successful.
         400:
           description: Bad request.
           content:
@@ -1463,10 +1433,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Specialty'
+              $ref: '#/components/schemas/SpecialtyFields'
         required: true
       responses:
-        200:
+        201:
           description: Specialty created successfully.
           headers:
             ETag:
@@ -1586,24 +1556,8 @@ paths:
               $ref: '#/components/schemas/Specialty'
         required: true
       responses:
-        200:
-          description: Specialty details found and returned.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Specialty'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
+        204:
+          description: Update successful.
         400:
           description: Bad request.
           content:
@@ -1728,10 +1682,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Vet'
+              $ref: '#/components/schemas/VetFields'
         required: true
       responses:
-        200:
+        201:
           description: Vet created successfully.
           headers:
             ETag:
@@ -1851,24 +1805,8 @@ paths:
               $ref: '#/components/schemas/Vet'
         required: true
       responses:
-        200:
-          description: Pet type details found and returned.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Vet'
-        304:
-          description: Not modified.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
+        204:
+          description: Update successful.
         400:
           description: Bad request.
           content:
@@ -1955,7 +1893,7 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       responses:
-        200:
+        201:
           description: User created successfully.
           headers:
             ETag:
@@ -2004,6 +1942,12 @@ components:
           type: string
           format: uri
           example: 'http://localhost:9966/petclinic/api/owner'
+          readOnly: true
+        instance:
+          title: Instance
+          description: A URI reference identifying the specific occurrence of the problem.
+          type: string
+          format: uri
           readOnly: true
         title:
           title: Title
@@ -2061,19 +2005,11 @@ components:
       required:
         - message
       additionalProperties: true
-    Specialty:
-      title: Specialty
-      description: Fields of specialty of vets.
+    SpecialtyFields:
+      title: Specialty fields
+      description: Editable fields of a specialty.
       type: object
       properties:
-        id:
-          title: ID
-          description: The ID of the specialty.
-          type: integer
-          format: int32
-          minimum: 0
-          example: 1
-          readOnly: true
         name:
           title: Name
           description: The name of the specialty.
@@ -2081,6 +2017,26 @@ components:
           maxLength: 80
           minLength: 1
           example: radiology
+      required:
+        - name
+    Specialty:
+      title: Specialty
+      description: Fields of specialty of vets.
+      allOf:
+        - $ref: '#/components/schemas/SpecialtyFields'
+        - type: object
+          properties:
+            id:
+              title: ID
+              description: The ID of the specialty.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              readOnly: true
+              maximum: 2147483647
+          required:
+            - id
       required:
         - id
         - name
@@ -2148,6 +2104,7 @@ components:
               minimum: 0
               example: 1
               readOnly: true
+              maximum: 2147483647
             pets:
               title: Pets
               description: The pets owned by this individual including any booked vet visits.
@@ -2286,6 +2243,7 @@ components:
               minimum: 0
               example: 1
               readOnly: true
+              maximum: 2147483647
             ownerId:
               title: Owner ID
               description: The ID of the pet's owner.
@@ -2294,6 +2252,7 @@ components:
               minimum: 0
               example: 1
               readOnly: true
+              maximum: 2147483647
             visits:
               title: Visits
               description: Vet visit bookings for this pet.
@@ -2351,6 +2310,7 @@ components:
               minimum: 0
               example: 1
               readOnly: true
+              maximum: 2147483647
       required:
         - id
         - firstName
@@ -2375,7 +2335,25 @@ components:
           maxLength: 255
           example: 'rabies shot'
       required:
+        - date
         - description
+    VisitCreate:
+      title: Visit create request
+      description: Fields required to create a vet visit.
+      allOf:
+        - $ref: '#/components/schemas/VisitFields'
+        - type: object
+          properties:
+            petId:
+              title: Pet ID
+              description: The ID of the pet.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              maximum: 2147483647
+          required:
+            - petId
     Visit:
       title: Visit
       description: A booking for a vet visit.
@@ -2391,6 +2369,7 @@ components:
               minimum: 0
               example: 1
               readOnly: true
+              maximum: 2147483647
             petId:
               title: Pet ID
               description: The ID of the pet.
@@ -2398,6 +2377,7 @@ components:
               format: int32
               minimum: 0
               example: 1
+              maximum: 2147483647
           required:
             - id
             - petId
@@ -2429,6 +2409,7 @@ components:
               format: int32
               minimum: 0
               example: 1
+              maximum: 2147483647
           required:
             - id
     User:
@@ -2463,6 +2444,9 @@ components:
             $ref: '#/components/schemas/Role'
       required:
         - username
+        - password
+        - roles
+        - enabled
     Role:
       title: Role
       description: A role.

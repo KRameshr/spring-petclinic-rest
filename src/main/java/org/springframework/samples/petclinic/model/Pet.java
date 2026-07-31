@@ -82,7 +82,7 @@ public class Pet extends NamedEntity {
 
     public List<Visit> getVisits() {
         List<Visit> sortedVisits = new ArrayList<>(getVisitsInternal());
-        sortedVisits.sort(Comparator.comparing(Visit::getDate).reversed());
+        sortedVisits.sort(Comparator.comparing(Visit::getDate, Comparator.nullsLast(Comparator.naturalOrder())).reversed());
         return Collections.unmodifiableList(sortedVisits);
     }
 

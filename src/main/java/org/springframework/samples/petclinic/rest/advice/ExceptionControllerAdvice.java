@@ -27,6 +27,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
@@ -137,6 +138,31 @@ public class ExceptionControllerAdvice {
         );
 
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
+    }
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    @ResponseBody
+    public ResponseEntity<ProblemDetail>
+            handleInvalidDataAccessApiUsageException(
+                InvalidDataAccessApiUsageException e,
+                HttpServletRequest request) {
+
+        logger.warn(
+            "Invalid data access API usage at {} {}: {}",
+            request.getMethod(),
+            request.getRequestURI(),
+            e.getMessage()
+        );
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        ProblemDetail detail = this.detailBuild(
+            e,
+            status,
+            request.getRequestURL(),
+            ERROR_INVALID_REQUEST
+        );
+
+        return ResponseEntity.status(status).body(detail);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

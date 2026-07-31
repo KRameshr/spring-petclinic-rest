@@ -27,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.mapper.VisitMapper;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.rest.api.VisitsApi;
+import org.springframework.samples.petclinic.rest.dto.VisitCreateDto;
 import org.springframework.samples.petclinic.rest.dto.VisitDto;
 import org.springframework.samples.petclinic.rest.dto.VisitFieldsDto;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -96,7 +97,7 @@ public ResponseEntity<VisitDto> getVisit(Integer visitId, String ifNoneMatch) {
 
 @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
 @Override
-public ResponseEntity<VisitDto> addVisit(VisitDto visitDto) {
+public ResponseEntity<VisitDto> addVisit(VisitCreateDto visitDto) {
     HttpHeaders headers = new HttpHeaders();
 
     Visit visit = visitMapper.toVisit(visitDto);
@@ -120,7 +121,7 @@ public ResponseEntity<VisitDto> addVisit(VisitDto visitDto) {
 
 @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
 @Override
-public ResponseEntity<VisitDto> updateVisit(
+public ResponseEntity<Void> updateVisit(
     Integer visitId,
     VisitFieldsDto visitDto
 ) {

@@ -1,12 +1,12 @@
 {
   "http-request": {
     "method": "GET",
-    "path": "/owners/13"
+    "path": "/owners/1"
   },
   "http-response": {
     "status": 200,
     "body": {
-      "id": 13,
+      "id": 1,
       "firstName": "George",
       "lastName": "Franklin",
       "address": "110 W. Liberty St.",

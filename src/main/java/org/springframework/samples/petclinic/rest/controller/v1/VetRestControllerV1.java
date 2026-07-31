@@ -26,6 +26,7 @@ import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.rest.api.VetsApi;
 import org.springframework.samples.petclinic.rest.dto.VetDto;
+import org.springframework.samples.petclinic.rest.dto.VetFieldsDto;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -109,7 +110,7 @@ public class VetRestControllerV1 implements VetsApi {
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
     public ResponseEntity<VetDto> addVet(
-            VetDto vetDto) {
+            VetFieldsDto vetDto) {
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -154,7 +155,7 @@ public class VetRestControllerV1 implements VetsApi {
 
     @PreAuthorize("hasRole(@roles.VET_ADMIN)")
     @Override
-    public ResponseEntity<VetDto> updateVet(
+    public ResponseEntity<Void> updateVet(
             Integer vetId,
             VetDto vetDto) {
 
