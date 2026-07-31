@@ -67,6 +67,14 @@ public class ExceptionControllerAdvice {
     private static final String ERROR_INVALID_REQUEST =
         "The request contains invalid or missing parameters";
 
+    /**
+     * Private method for constructing the {@link ProblemDetail} object passing the name and details of the exception
+     * class.
+     *
+     * @param e     Object referring to the thrown exception.
+     * @param status HTTP response status.
+     * @param url URL request.
+     */
     private ProblemDetail detailBuild(
             Exception e,
             HttpStatus status,
@@ -112,6 +120,14 @@ public class ExceptionControllerAdvice {
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
+    /**
+     * Handles {@link DataIntegrityViolationException} which typically indicates database constraint violations. This
+     * method returns a 404 Not Found status if an entity does not exist.
+     *
+     * @param e The {@link DataIntegrityViolationException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 404 Not Found status
+     */
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
     public ResponseEntity<ProblemDetail>
@@ -191,6 +207,13 @@ public class ExceptionControllerAdvice {
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
+    /**
+     * Handles exception thrown by Bean Validation on controller methods parameters
+     *
+     * @param e The {@link MethodArgumentNotValidException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ResponseEntity<ProblemDetail>
@@ -329,6 +352,13 @@ public class ExceptionControllerAdvice {
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
+    /**
+     * Handles all general exceptions by returning a 500 Internal Server Error status with error details.
+     *
+     * @param e The {@link Exception} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 500 Internal Server Error status
+     */
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseEntity<ProblemDetail> handleGeneralException(
