@@ -321,13 +321,26 @@ This project contains **non-regression tests** for the Petclinic API, built with
     ```
 > Note: You can use your currently bash installed. Like: "bash postman-tests.sh"
 
+## Interesting Spring Petclinic forks
 
+The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
+GitHub org is the "canonical" implementation, currently based on Spring Boot and Thymeleaf.
+
+This [spring-petclinic-rest](https://github.com/spring-petclinic/spring-petclinic-rest/) project is one of the [several forks](https://spring-petclinic.github.io/docs/forks.html) 
+hosted in a special GitHub org: [spring-petclinic](https://github.com/spring-petclinic).
+If you have a special interest in a different technology stack
+that could be used to implement the Pet Clinic then please join the community there.
+
+# Contributing
+
+The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-rest/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
+
+For pull requests, editor preferences are available in the [editor config](https://github.com/spring-petclinic/spring-petclinic-rest/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
 ## Contract Testing with Specmatic
-
 This project includes API contract tests using Specmatic and JUnit 5 against the OpenAPI specification.
 
-### Run the contract tests
+#### Run the contract tests
 
 1. Start the application:
 
@@ -340,8 +353,3 @@ This project includes API contract tests using Specmatic and JUnit 5 against the
 ```bash
 ./mvnw test -Dtest=ContractTest
 ```
-# Contributing
-
-The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-rest/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
-
-For pull requests, editor preferences are available in the [editor config](https://github.com/spring-petclinic/spring-petclinic-rest/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
