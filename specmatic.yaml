@@ -5,7 +5,6 @@ specmatic:
     test:
       schemaResiliencyTests: all
       maxTestRequestCombinations: 1
-      parallelism: 1
 
 systemUnderTest:
   service:
