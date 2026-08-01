@@ -23,7 +23,6 @@ import java.util.Objects;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -46,8 +45,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 /**
  * Global Exception handler for REST controllers.
  * <p>
- * This class handles exceptions thrown by REST controllers and returns
- * appropriate HTTP responses to the client.
+ * This class handles exceptions thrown by REST controllers and returns appropriate HTTP responses to the client.
  *
  * @author Vitaliy Fedoriv
  * @author Alexander Dudkin
@@ -55,17 +53,10 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @ControllerAdvice
 public class ExceptionControllerAdvice {
 
-    private static final Logger logger =
-        LoggerFactory.getLogger(ExceptionControllerAdvice.class);
-
-    private static final String ERROR_UNEXPECTED =
-        "An unexpected error occurred while processing your request";
-
-    private static final String ERROR_DATA_INTEGRITY =
-        "The requested resource could not be processed due to a data constraint violation";
-
-    private static final String ERROR_INVALID_REQUEST =
-        "The request contains invalid or missing parameters";
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
+    private static final String ERROR_UNEXPECTED = "An unexpected error occurred while processing your request";
+    private static final String ERROR_DATA_INTEGRITY = "The requested resource could not be processed due to a data constraint violation";
+    private static final String ERROR_INVALID_REQUEST = "The request contains invalid or missing parameters";
 
     /**
      * Private method for constructing the {@link ProblemDetail} object passing the name and details of the exception
@@ -75,48 +66,29 @@ public class ExceptionControllerAdvice {
      * @param status HTTP response status.
      * @param url URL request.
      */
-    private ProblemDetail detailBuild(
-            Exception e,
-            HttpStatus status,
-            StringBuffer url,
-            String detail) {
-
+    private ProblemDetail detailBuild(Exception e, HttpStatus status, StringBuffer url, String detail) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(status);
         problemDetail.setType(URI.create(url.toString()));
         problemDetail.setTitle(e.getClass().getSimpleName());
         problemDetail.setDetail(detail);
         problemDetail.setProperty("timestamp", Instant.now());
-        problemDetail.setProperty(
-            "schemaValidationErrors",
-            List.<ValidationMessageDto>of()
-        );
-
+        problemDetail.setProperty("schemaValidationErrors", List.<ValidationMessageDto>of());
         return problemDetail;
     }
 
+    /**
+     * Handles {@link HttpMediaTypeNotSupportedException} thrown when the request's Content-Type is not supported.
+     *
+     * @param e The {@link HttpMediaTypeNotSupportedException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
+     */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleHttpMediaTypeNotSupportedException(
-                HttpMediaTypeNotSupportedException e,
-                HttpServletRequest request) {
-
-        logger.warn(
-            "Unsupported media type at {} {}: {}",
-            request.getMethod(),
-            request.getRequestURI(),
-            e.getMessage()
-        );
-
+    public ResponseEntity<ProblemDetail> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e, HttpServletRequest request) {
+        logger.warn("Unsupported media type at {} {}: {}", request.getMethod(), request.getRequestURI(), e.getMessage());
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_INVALID_REQUEST
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_INVALID_REQUEST);
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
@@ -130,80 +102,46 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleDataIntegrityViolationException(
-                DataIntegrityViolationException e,
-                HttpServletRequest request) {
-
-        logger.warn(
-            "Data integrity violation at {} {}: {}",
+    public ResponseEntity<ProblemDetail> handleDataIntegrityViolationException(DataIntegrityViolationException e, HttpServletRequest request) {
+        logger.warn("Data integrity violation at {} {}: {}",
             request.getMethod(),
             request.getRequestURI(),
-            e.getMessage()
-        );
-
+            e.getMessage());
         logger.debug("Data integrity violation stacktrace", e);
-
         HttpStatus status = HttpStatus.NOT_FOUND;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_DATA_INTEGRITY
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_DATA_INTEGRITY);
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
+
+    /**
+     * Handles {@link InvalidDataAccessApiUsageException} thrown for invalid API usage against the data access layer.
+     *
+     * @param e The {@link InvalidDataAccessApiUsageException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
+     */
     @ExceptionHandler(InvalidDataAccessApiUsageException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleInvalidDataAccessApiUsageException(
-                InvalidDataAccessApiUsageException e,
-                HttpServletRequest request) {
-
-        logger.warn(
-            "Invalid data access API usage at {} {}: {}",
-            request.getMethod(),
-            request.getRequestURI(),
-            e.getMessage()
-        );
-
+    public ResponseEntity<ProblemDetail> handleInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException e, HttpServletRequest request) {
+        logger.warn("Invalid data access API usage at {} {}: {}", request.getMethod(), request.getRequestURI(), e.getMessage());
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_INVALID_REQUEST
-        );
-
-        return ResponseEntity.status(status).body(detail);
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_INVALID_REQUEST);
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
+    /**
+     * Handles {@link MethodArgumentTypeMismatchException} thrown when a controller method argument has an invalid type.
+     *
+     * @param e The {@link MethodArgumentTypeMismatchException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
+     */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleMethodArgumentTypeMismatchException(
-                MethodArgumentTypeMismatchException e,
-                HttpServletRequest request) {
-
-        logger.warn(
-            "Method argument type mismatch at {} {}: {}",
-            request.getMethod(),
-            request.getRequestURI(),
-            e.getMessage()
-        );
-
+    public ResponseEntity<ProblemDetail> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
+        logger.warn("Method argument type mismatch at {} {}: {}", request.getMethod(), request.getRequestURI(), e.getMessage());
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            "The request contains an invalid parameter type"
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), "The request contains an invalid parameter type");
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
@@ -216,139 +154,70 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleMethodArgumentNotValidException(
-                MethodArgumentNotValidException e,
-                HttpServletRequest request) {
-
+    public ResponseEntity<ProblemDetail> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
         BindingErrorsResponse errors = new BindingErrorsResponse();
         BindingResult bindingResult = e.getBindingResult();
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_INVALID_REQUEST
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_INVALID_REQUEST);
         if (bindingResult.hasErrors()) {
             errors.addAllErrors(bindingResult);
-
-            List<ValidationMessageDto> schemaValidationErrors =
-                bindingResult.getFieldErrors().stream()
-                    .map(fieldError -> {
-                        String rejectedValue = Objects.toString(
-                            fieldError.getRejectedValue(),
-                            "null"
-                        );
-
-                        String defaultMessage = Objects.toString(
-                            fieldError.getDefaultMessage(),
-                            "Validation failed"
-                        );
-
-                        String message =
-                            "Field '%s' %s (rejected value: %s)".formatted(
-                                fieldError.getField(),
-                                defaultMessage,
-                                rejectedValue
-                            );
-
-                        return new ValidationMessageDto(message)
-                            .putAdditionalProperty(
-                                "field",
-                                fieldError.getField()
-                            )
-                            .putAdditionalProperty(
-                                "rejectedValue",
-                                rejectedValue
-                            )
-                            .putAdditionalProperty(
-                                "defaultMessage",
-                                defaultMessage
-                            );
-                    })
-                    .toList();
-
-            logger.debug(
-                "Validation error at {} {}: {}",
+            List<ValidationMessageDto> schemaValidationErrors = bindingResult.getFieldErrors().stream()
+                .map(fieldError -> {
+                    String rejectedValue = Objects.toString(fieldError.getRejectedValue(), "null");
+                    String defaultMessage = Objects.toString(fieldError.getDefaultMessage(), "Validation failed");
+                    String message = "Field '%s' %s (rejected value: %s)".formatted(
+                        fieldError.getField(),
+                        defaultMessage,
+                        rejectedValue);
+                    return new ValidationMessageDto(message)
+                        .putAdditionalProperty("field", fieldError.getField())
+                        .putAdditionalProperty("rejectedValue", rejectedValue)
+                        .putAdditionalProperty("defaultMessage", defaultMessage);
+                })
+                .toList();
+            logger.debug("Validation error at {} {}: {}",
                 request.getMethod(),
                 request.getRequestURI(),
-                bindingResult.getFieldErrors()
-            );
-
-            detail.setProperty(
-                "schemaValidationErrors",
-                schemaValidationErrors
-            );
+                bindingResult.getFieldErrors());
+            detail.setProperty("schemaValidationErrors", schemaValidationErrors);
         }
-
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
+    /**
+     * Handles {@link ConstraintViolationException} thrown when bean validation constraints are violated
+     * outside of a request body (e.g. path variables, request parameters).
+     *
+     * @param e The {@link ConstraintViolationException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleConstraintViolationException(
-                ConstraintViolationException e,
-                HttpServletRequest request) {
-
+    public ResponseEntity<ProblemDetail> handleConstraintViolationException(ConstraintViolationException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_INVALID_REQUEST
-        );
-
-        List<ValidationMessageDto> schemaValidationErrors =
-            e.getConstraintViolations().stream()
-                .map(violation ->
-                    new ValidationMessageDto(violation.getMessage())
-                )
-                .toList();
-
-        detail.setProperty(
-            "schemaValidationErrors",
-            schemaValidationErrors
-        );
-
-        logger.debug(
-            "Constraint violation at {} {}: {}",
-            request.getMethod(),
-            request.getRequestURI(),
-            e.getConstraintViolations()
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_INVALID_REQUEST);
+        List<ValidationMessageDto> schemaValidationErrors = e.getConstraintViolations().stream()
+            .map(violation -> new ValidationMessageDto(violation.getMessage()))
+            .toList();
+        detail.setProperty("schemaValidationErrors", schemaValidationErrors);
+        logger.debug("Constraint violation at {} {}: {}", request.getMethod(), request.getRequestURI(), e.getConstraintViolations());
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
+    /**
+     * Handles {@link HttpMessageNotReadableException} thrown when the request body is missing or malformed.
+     *
+     * @param e The {@link HttpMessageNotReadableException} to be handled
+     * @param request {@link HttpServletRequest} object referring to the current request.
+     * @return A {@link ResponseEntity} containing the error information and a 400 Bad Request status.
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail>
-            handleHttpMessageNotReadableException(
-                HttpMessageNotReadableException e,
-                HttpServletRequest request) {
-
-        logger.warn(
-            "Unreadable HTTP message at {} {}: {}",
-            request.getMethod(),
-            request.getRequestURI(),
-            e.getMessage()
-        );
-
+    public ResponseEntity<ProblemDetail> handleHttpMessageNotReadableException(HttpMessageNotReadableException e, HttpServletRequest request) {
+        logger.warn("Unreadable HTTP message at {} {}: {}", request.getMethod(), request.getRequestURI(), e.getMessage());
         HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_INVALID_REQUEST
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_INVALID_REQUEST);
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
 
@@ -361,26 +230,11 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ResponseEntity<ProblemDetail> handleGeneralException(
-            Exception e,
-            HttpServletRequest request) {
-
-        logger.error(
-            "Unexpected error at {} {}",
-            request.getMethod(),
-            request.getRequestURI(),
-            e
-        );
-
+    public ResponseEntity<ProblemDetail> handleGeneralException(Exception e, HttpServletRequest request) {
+        logger.error("Unexpected error at {} {}", request.getMethod(), request.getRequestURI(), e);
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-
-        ProblemDetail detail = this.detailBuild(
-            e,
-            status,
-            request.getRequestURL(),
-            ERROR_UNEXPECTED
-        );
-
+        ProblemDetail detail = this.detailBuild(e, status, request.getRequestURL(), ERROR_UNEXPECTED);
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(detail);
     }
+
 }
