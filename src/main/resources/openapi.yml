@@ -2037,9 +2037,6 @@ components:
               maximum: 2147483647
           required:
             - id
-      required:
-        - id
-        - name
     OwnerFields:
       title: Owner fields
       description: Editable fields of a pet owner.
@@ -2311,11 +2308,8 @@ components:
               example: 1
               readOnly: true
               maximum: 2147483647
-      required:
-        - id
-        - firstName
-        - lastName
-        - specialties
+          required:
+            - id
     VisitFields:
       title: Visit fields
       description: Editable fields of a vet visit.

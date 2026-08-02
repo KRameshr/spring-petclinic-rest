@@ -1,7 +1,7 @@
 {
-  "http-request": { "method": "DELETE", "path": "/specialties/3" },
+  "http-request": { "method": "DELETE", "path": "/specialties/4" },
   "http-response": {
     "status": 200,
-    "body": { "id": 3, "name": "dentistry" }
+    "body": { "id": 4, "name": "oncology" }
   }
 }

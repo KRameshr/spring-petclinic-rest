@@ -11,7 +11,8 @@ INSERT INTO vets (first_name, last_name) VALUES
 INSERT INTO specialties (name) VALUES 
 ('radiology'),
 ('surgery'),
-('dentistry');
+('dentistry'),
+('oncology');
 
 -- Link Vets to Specialties
 INSERT INTO vet_specialties (vet_id, specialty_id) VALUES 
