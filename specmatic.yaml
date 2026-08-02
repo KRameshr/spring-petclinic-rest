@@ -34,4 +34,4 @@ components:
       openapi:
         type: test
         baseUrl: http://localhost:9966/petclinic/api
-        actuatorUrl: http://localhost:9966/petclinic/actuator
+        actuatorUrl: http://localhost:9966/petclinic/actuator/mappings
